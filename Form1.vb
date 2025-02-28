@@ -3,6 +3,9 @@
 
     Public machinebox(-1) As GroupBox
 
+    Public z As Integer
+    Public boxtally As Integer
+
     Public infobox1(-1) As TextBox
     Public infobox2(-1) As TextBox
     Public infobox3(-1) As TextBox
@@ -19,11 +22,31 @@
     Public infolbl5(-1) As Label
     Public infolbl6(-1) As Label
 
+    Public grnAngle(99) As Single
+    Public yelAngle(99) As Single
+    Public redAngle(99) As Single
+
     Public Machinelist As New DataTable
     Public chosen As DataColumn = Machinelist.Columns.Add("Display", Type.GetType("System.Boolean"))
     Public ID As DataColumn = Machinelist.Columns.Add("ID", Type.GetType("System.String"))
     Public workcenter As DataColumn = Machinelist.Columns.Add("WCID", Type.GetType("System.String"))
     Public descript As DataColumn = Machinelist.Columns.Add("Description", Type.GetType("System.String"))
+
+    Private Sub GroupBox_Paint(sender As Object, e As PaintEventArgs)
+        Dim rect As New Rectangle(30, 55, 140, 140)
+        'Create start and sweep angles on ellipse.
+        'Dim firstAngle As Single = 0F
+        Using grnbrush As New SolidBrush(Color.LimeGreen)
+            e.Graphics.FillPie(grnbrush, rect, 0, grnAngle(z))
+        End Using
+        Using yelbrush As New SolidBrush(Color.Yellow)
+            e.Graphics.FillPie(yelbrush, rect, grnAngle(z), yelAngle(z))
+        End Using
+        Using redbrush As New SolidBrush(Color.Red)
+            e.Graphics.FillPie(redbrush, rect, grnAngle(z) + yelAngle(z), redAngle(z))
+        End Using
+
+    End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WorkcenterlistTableAdapter.ClearBeforeFill = True
@@ -82,6 +105,8 @@
                 machinebox(boxcount).Height = 240
                 machinebox(boxcount).Text = wc + " - " + desc
                 FlowLayoutPanel1.Controls.Add(machinebox(boxcount))
+
+                AddHandler machinebox(boxcount).Paint, AddressOf GroupBox_Paint
 
                 ReDim Preserve infolbl1(boxcount)
                 infolbl1(boxcount) = New Label
@@ -198,7 +223,7 @@
             End If
             intCursor += 1
         Loop
-
+        boxtally = boxcount - 1
         Timer1.Enabled = True
     End Sub
 
@@ -236,4 +261,14 @@
         End If
     End Sub
 
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        For z = 1 To boxtally
+
+            ' calculate redAngle, grnAngle, yelAngle
+            ' update textboxes
+
+
+            machinebox(z).Refresh()
+        Next
+    End Sub
 End Class
