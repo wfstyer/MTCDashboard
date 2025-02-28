@@ -27,6 +27,7 @@
                 If j% < 1 Then Exit Do
                 machchoice(j%) = True
             Loop
+            filereader.Dispose()
         End If
 
         Dim intCursor% = 0
@@ -56,7 +57,28 @@
 
             ' write or overwrite MTCgrid.txt
 
+            For i = 0 To 99
+                machchoice(i) = False
+            Next
 
+            Dim machselect As String = Environ("USERPROFILE") & "\AppData\Roaming\MTCgrid.txt"
+
+            If System.IO.File.Exists(machselect) Then
+                System.IO.File.WriteAllText(machselect, "")
+            Else
+                System.IO.File.Create(machselect).Dispose()
+            End If
+
+            Dim filewriter As System.IO.StreamWriter
+            filewriter = My.Computer.FileSystem.OpenTextFileWriter(machselect, True)
+            Dim intCursor% = 0
+            Do Until intCursor = DataSet1.workcenterlist.Rows.Count
+                If Machinelist.Rows.Item(intCursor)(chosen) Then
+                    filewriter.WriteLine(intCursor)
+                End If
+                intCursor += 1
+            Loop
+            filewriter.Dispose()
             DataGridView1.Visible = False
             Button1.Text = "Machines"
         End If
