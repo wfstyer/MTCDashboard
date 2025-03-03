@@ -315,32 +315,27 @@
             yelAngle(z) = 360 * (idletime / totaltime)
             redAngle(z) = 360 - grnAngle(z) - yelAngle(z)
 
-            'Dim iminutestoseconds As Int32 = idletime
-            'Dim ihms = TimeSpan.FromSeconds(iminutestoseconds)
-            'Dim ihr = Format(ihms.Hours, "#0")
-            'Dim imin = Format(ihms.Minutes, "00")
-            'Dim isec = Format(ihms.Seconds, "00")
+            Dim iminutestoseconds As Int32 = idletime
+            Dim ihms = TimeSpan.FromSeconds(iminutestoseconds)
+            Dim ihr = Format(ihms.Hours, "#0")
+            Dim imin = Format(ihms.Minutes, "00")
+            Dim isec = Format(ihms.Seconds, "00")
 
-            'Dim cminutestoseconds As Int32 = cycletime
-            'Dim chms = TimeSpan.FromSeconds(cminutestoseconds)
-            'Dim chr = Format(chms.Hours, "#0")
-            'Dim cmin = Format(chms.Minutes, "00")
-            'Dim csec = Format(chms.Seconds, "00")
+            Dim cminutestoseconds As Int32 = cycletime
+            Dim chms = TimeSpan.FromSeconds(cminutestoseconds)
+            Dim chr = Format(chms.Hours, "#0")
+            Dim cmin = Format(chms.Minutes, "00")
+            Dim csec = Format(chms.Seconds, "00")
 
-            'Dim ominutestoseconds As Int32 = offtime
-            'Dim ohms = TimeSpan.FromSeconds(ominutestoseconds)
-            'Dim ohr = Format(ohms.Hours, "#0")
-            'Dim omin = Format(ohms.Minutes, "00")
-            'Dim osec = Format(ohms.Seconds, "00")
+            Dim ominutestoseconds As Int32 = offtime
+            Dim ohms = TimeSpan.FromSeconds(ominutestoseconds)
+            Dim ohr = Format(ohms.Hours, "#0")
+            Dim omin = Format(ohms.Minutes, "00")
+            Dim osec = Format(ohms.Seconds, "00")
 
-            'infobox1(z).Text = ohr + ":" + omin + ":" + osec
-            'infobox2(z).Text = ihr + ":" + imin + ":" + isec
-            'infobox3(z).Text = chr + ":" + cmin + ":" + csec
-
-
-            infobox1(z).Text = offtime
-            infobox2(z).Text = idletime
-            infobox3(z).Text = cycletime
+            infobox1(z).Text = ohr + ":" + omin + ":" + osec
+            infobox2(z).Text = ihr + ":" + imin + ":" + isec
+            infobox3(z).Text = chr + ":" + cmin + ":" + csec
             infobox4(z).Text = myrow(0)("Jobno")
             infobox5(z).Text = myrow(0)("Opno")
             infobox6(z).Text = myrow(0)("Count")
