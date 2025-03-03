@@ -1,10 +1,18 @@
 ﻿Public Class Form1
+
+    Public shifttime As Date = TimeValue(" 5:59 AM")
+    Public shiftstart As New DateTime(Today.Year, Today.Month, Today.Day, shifttime.Hour, shifttime.Minute, shifttime.Second)
+    'Public totaltime As Double
+    'Public cycletime As Double
+    'Public idletime As Double
+
     Public machchoice(99) As Boolean
 
     Public machinebox(-1) As GroupBox
 
     Public z As Integer
     Public boxtally As Integer
+    Public chosenmachines(99) As String
 
     Public infobox1(-1) As TextBox
     Public infobox2(-1) As TextBox
@@ -62,12 +70,15 @@
             Dim filereader As System.IO.StreamReader
             filereader = My.Computer.FileSystem.OpenTextFileReader(machselect)
             Dim stringreader As String
-            Dim j%
+            Dim j$
+            Dim i% = 1
             Do
                 stringreader = filereader.ReadLine()
-                j% = Val(Trim(stringreader))
-                If j% < 1 Then Exit Do
-                machchoice(j%) = True
+                j$ = Trim(stringreader)
+                If Val(j$) < 1 Then Exit Do
+                machchoice(Val(j$)) = True
+                chosenmachines(i%) = j$
+                i% += 1
             Loop
             filereader.Dispose()
         End If
@@ -262,11 +273,77 @@
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Me.WorkcenterlistTableAdapter.Fill(Me.DataSet1.workcenterlist)
+        Dim totaltime As Int32
+        Dim idletime As Int32
+        Dim cycletime As Int32
+        totaltime = DateDiff(DateInterval.Second, shiftstart, Now)
+
         For z = 1 To boxtally
 
-            ' calculate redAngle, grnAngle, yelAngle
-            ' update textboxes
+            Dim searchvalue = chosenmachines(z)
+            Dim searchtext = "ID = '" + searchvalue + "'"
+            Dim myrow() As DataRow
+            myrow = DataSet1.workcenterlist.Select(searchtext)
+            idletime = Val(myrow(0)("Idle_Time"))
+            cycletime = Val(myrow(0)("Run_Time"))
+            Dim machineon As Boolean = myrow(0)("Available")
+            Dim machinerunning As Boolean = myrow(0)("Running")
+            If machinerunning Then
+                ' running
+                infobox1(z).BackColor = Color.White
+                infobox2(z).BackColor = Color.White
+                infobox3(z).BackColor = Color.LimeGreen
+            Else
+                If machineon Then
+                    ' idle
+                    infobox1(z).BackColor = Color.White
+                    infobox2(z).BackColor = Color.Yellow
+                    infobox3(z).BackColor = Color.White
+                Else
+                    ' off
+                    infobox1(z).BackColor = Color.Red
+                    infobox2(z).BackColor = Color.White
+                    infobox3(z).BackColor = Color.White
+                End If
+            End If
 
+            Dim offtime As Integer
+            offtime = totaltime - idletime - cycletime
+
+            grnAngle(z) = 360 * (cycletime / totaltime)
+            yelAngle(z) = 360 * (idletime / totaltime)
+            redAngle(z) = 360 - grnAngle(z) - yelAngle(z)
+
+            'Dim iminutestoseconds As Int32 = idletime
+            'Dim ihms = TimeSpan.FromSeconds(iminutestoseconds)
+            'Dim ihr = Format(ihms.Hours, "#0")
+            'Dim imin = Format(ihms.Minutes, "00")
+            'Dim isec = Format(ihms.Seconds, "00")
+
+            'Dim cminutestoseconds As Int32 = cycletime
+            'Dim chms = TimeSpan.FromSeconds(cminutestoseconds)
+            'Dim chr = Format(chms.Hours, "#0")
+            'Dim cmin = Format(chms.Minutes, "00")
+            'Dim csec = Format(chms.Seconds, "00")
+
+            'Dim ominutestoseconds As Int32 = offtime
+            'Dim ohms = TimeSpan.FromSeconds(ominutestoseconds)
+            'Dim ohr = Format(ohms.Hours, "#0")
+            'Dim omin = Format(ohms.Minutes, "00")
+            'Dim osec = Format(ohms.Seconds, "00")
+
+            'infobox1(z).Text = ohr + ":" + omin + ":" + osec
+            'infobox2(z).Text = ihr + ":" + imin + ":" + isec
+            'infobox3(z).Text = chr + ":" + cmin + ":" + csec
+
+
+            infobox1(z).Text = offtime
+            infobox2(z).Text = idletime
+            infobox3(z).Text = cycletime
+            infobox4(z).Text = myrow(0)("Jobno")
+            infobox5(z).Text = myrow(0)("Opno")
+            infobox6(z).Text = myrow(0)("Count")
 
             machinebox(z).Refresh()
         Next
