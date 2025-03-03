@@ -14,9 +14,10 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>\\ut01\Apps\GA_DEV\Program Deployment\MTCDash\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
+    <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -24,10 +25,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -64,6 +65,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>ms-icon-70x70.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>205509E405CD886A06626881741B1B2FBE3D6E5A</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>MTCDashboard_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -142,6 +155,7 @@
     <None Include="DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
+    <None Include="MTCDashboard_TemporaryKey.pfx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
