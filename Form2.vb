@@ -37,6 +37,11 @@
     Public workcenter As DataColumn = Machinelist.Columns.Add("WCID", Type.GetType("System.String"))
     Public descript As DataColumn = Machinelist.Columns.Add("Description", Type.GetType("System.String"))
 
+    Public CurrentDate As New DataTable
+    Public WorkCID As DataColumn = CurrentDate.Columns.Add("WCID", Type.GetType("System.String"))
+    Public MarkTime As DataColumn = CurrentDate.Columns.Add("MarkTime", Type.GetType("System.DateTime"))
+    Public StatusChange As DataColumn = CurrentDate.Columns.Add("OnOff", Type.GetType("System.Boolean"))
+
     Private Sub GroupBox_Paint(sender As Object, e As PaintEventArgs)
         'Dim rect As New Rectangle(30, 55, 140, 140)
         'Create start and sweep angles on ellipse.
@@ -246,13 +251,21 @@
             intCursor += 1
         Loop
         boxtally = boxcount - 1
-        'Timer1.Enabled = True
+        Timer1.Enabled = True
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Me.WorkcenterlistTableAdapter.Fill(Me.DataSet1.workcenterlist)
         Me.MtcMasterTableAdapter.ClearBeforeFill = True
         Me.MtcMasterTableAdapter.FillByToday(Me.DataSet1.MTCMaster)
+
+
+        For i% = 0 To DataSet1.MTCMaster.Rows.Count
+            Dim workrow As DataRow = CurrentDate.NewRow
+            workrow(WorkCID) = DataSet1.MTCMaster.Item(i%).WCID
+            workrow(MarkTime) = DataSet1.MTCMaster.Item(i%).Nowtime
+            workrow(StatusChange) = DataSet1.MTCMaster.Item(i%).Running
+        Next
 
         'Dim pagegraphics As Graphics = Me.CreateGraphics
         'pagegraphics.Clear(Color.White)
@@ -265,7 +278,8 @@
         'Dim cycletime As Int32
         'totaltime = DateDiff(DateInterval.Second, shiftstart, Now)
 
-        For z = 1 To boxtally
+        For z% = 1 To boxtally
+
 
             '    Dim searchvalue = chosenmachines(z)
             '    Dim searchtext = "ID = '" + searchvalue + "'"
