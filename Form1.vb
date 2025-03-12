@@ -2,9 +2,6 @@
 
     Public shifttime As Date = TimeValue(" 5:59 AM")
     Public shiftstart As New DateTime(Today.Year, Today.Month, Today.Day, shifttime.Hour, shifttime.Minute, shifttime.Second)
-    'Public totaltime As Double
-    'Public cycletime As Double
-    'Public idletime As Double
 
     Public machchoice(99) As Boolean
 
@@ -111,123 +108,137 @@
                 desc = Machinelist.Rows.Item(intCursor)(descript)
 
                 ReDim Preserve machinebox(boxcount)
-                machinebox(boxcount) = New GroupBox
-                machinebox(boxcount).Width = 200
-                machinebox(boxcount).Height = 240
-                machinebox(boxcount).Text = wc + " - " + desc
+                machinebox(boxcount) = New GroupBox With {
+                    .Width = 200,
+                    .Height = 240,
+                    .Text = wc + " - " + desc
+                }
                 FlowLayoutPanel1.Controls.Add(machinebox(boxcount))
 
                 AddHandler machinebox(boxcount).Paint, AddressOf GroupBox_Paint
 
                 ReDim Preserve infolbl1(boxcount)
-                infolbl1(boxcount) = New Label
-                infolbl1(boxcount).Text = "Off"
-                infolbl1(boxcount).Left = 18
-                infolbl1(boxcount).Top = 200
-                infolbl1(boxcount).Width = 21
-                infolbl1(boxcount).Height = 13
+                infolbl1(boxcount) = New Label With {
+                    .Text = "Off",
+                    .Left = 18,
+                    .Top = 200,
+                    .Width = 21,
+                    .Height = 13
+                }
                 machinebox(boxcount).Controls.Add(infolbl1(boxcount))
 
                 ReDim Preserve infolbl2(boxcount)
-                infolbl2(boxcount) = New Label
-                infolbl2(boxcount).Text = "Idle"
-                infolbl2(boxcount).Left = 66
-                infolbl2(boxcount).Top = 200
-                infolbl2(boxcount).Width = 24
-                infolbl2(boxcount).Height = 13
+                infolbl2(boxcount) = New Label With {
+                    .Text = "Idle",
+                    .Left = 66,
+                    .Top = 200,
+                    .Width = 24,
+                    .Height = 13
+                }
                 machinebox(boxcount).Controls.Add(infolbl2(boxcount))
 
                 ReDim Preserve infolbl3(boxcount)
-                infolbl3(boxcount) = New Label
-                infolbl3(boxcount).Text = "Run"
-                infolbl3(boxcount).Left = 114
-                infolbl3(boxcount).Top = 200
-                infolbl3(boxcount).Width = 27
-                infolbl3(boxcount).Height = 13
+                infolbl3(boxcount) = New Label With {
+                    .Text = "Run",
+                    .Left = 114,
+                    .Top = 200,
+                    .Width = 27,
+                    .Height = 13
+                }
                 machinebox(boxcount).Controls.Add(infolbl3(boxcount))
 
                 ReDim Preserve infolbl4(boxcount)
-                infolbl4(boxcount) = New Label
-                infolbl4(boxcount).Text = "Job#"
-                infolbl4(boxcount).Left = 15
-                infolbl4(boxcount).Top = 39
-                infolbl4(boxcount).Width = 31
-                infolbl4(boxcount).Height = 13
+                infolbl4(boxcount) = New Label With {
+                    .Text = "Job#",
+                    .Left = 15,
+                    .Top = 39,
+                    .Width = 31,
+                    .Height = 13
+                }
                 machinebox(boxcount).Controls.Add(infolbl4(boxcount))
 
                 ReDim Preserve infolbl5(boxcount)
-                infolbl5(boxcount) = New Label
-                infolbl5(boxcount).Text = "Op#"
-                infolbl5(boxcount).Left = 86
-                infolbl5(boxcount).Top = 39
-                infolbl5(boxcount).Width = 28
-                infolbl5(boxcount).Height = 13
+                infolbl5(boxcount) = New Label With {
+                    .Text = "Op#",
+                    .Left = 86,
+                    .Top = 39,
+                    .Width = 28,
+                    .Height = 13
+                }
                 machinebox(boxcount).Controls.Add(infolbl5(boxcount))
 
                 ReDim Preserve infolbl6(boxcount)
-                infolbl6(boxcount) = New Label
-                infolbl6(boxcount).Text = "Count"
-                infolbl6(boxcount).Left = 152
-                infolbl6(boxcount).Top = 39
-                infolbl6(boxcount).Width = 35
-                infolbl6(boxcount).Height = 13
+                infolbl6(boxcount) = New Label With {
+                    .Text = "Count",
+                    .Left = 152,
+                    .Top = 39,
+                    .Width = 35,
+                    .Height = 13
+                }
                 machinebox(boxcount).Controls.Add(infolbl6(boxcount))
 
                 ReDim Preserve infobox1(boxcount)
-                infobox1(boxcount) = New TextBox
-                infobox1(boxcount).Left = 4
-                infobox1(boxcount).Top = 215
-                infobox1(boxcount).Width = 48
-                infobox1(boxcount).Height = 20
+                infobox1(boxcount) = New TextBox With {
+                    .Left = 4,
+                    .Top = 215,
+                    .Width = 48,
+                    .Height = 20
+                }
                 machinebox(boxcount).Controls.Add(infobox1(boxcount))
 
                 ReDim Preserve infobox2(boxcount)
-                infobox2(boxcount) = New TextBox
-                infobox2(boxcount).Left = 54
-                infobox2(boxcount).Top = 215
-                infobox2(boxcount).Width = 48
-                infobox2(boxcount).Height = 20
+                infobox2(boxcount) = New TextBox With {
+                    .Left = 54,
+                    .Top = 215,
+                    .Width = 48,
+                    .Height = 20
+                }
                 machinebox(boxcount).Controls.Add(infobox2(boxcount))
 
                 ReDim Preserve infobox3(boxcount)
-                infobox3(boxcount) = New TextBox
-                infobox3(boxcount).Left = 104
-                infobox3(boxcount).Top = 215
-                infobox3(boxcount).Width = 48
-                infobox3(boxcount).Height = 20
+                infobox3(boxcount) = New TextBox With {
+                    .Left = 104,
+                    .Top = 215,
+                    .Width = 48,
+                    .Height = 20
+                }
                 machinebox(boxcount).Controls.Add(infobox3(boxcount))
 
                 ReDim Preserve infobox4(boxcount)
-                infobox4(boxcount) = New TextBox
-                infobox4(boxcount).Left = 6
-                infobox4(boxcount).Top = 17
-                infobox4(boxcount).Width = 48
-                infobox4(boxcount).Height = 20
+                infobox4(boxcount) = New TextBox With {
+                    .Left = 6,
+                    .Top = 17,
+                    .Width = 48,
+                    .Height = 20
+                }
                 machinebox(boxcount).Controls.Add(infobox4(boxcount))
 
                 ReDim Preserve infobox5(boxcount)
-                infobox5(boxcount) = New TextBox
-                infobox5(boxcount).Left = 76
-                infobox5(boxcount).Top = 17
-                infobox5(boxcount).Width = 48
-                infobox5(boxcount).Height = 20
+                infobox5(boxcount) = New TextBox With {
+                    .Left = 76,
+                    .Top = 17,
+                    .Width = 48,
+                    .Height = 20
+                }
                 machinebox(boxcount).Controls.Add(infobox5(boxcount))
 
                 ReDim Preserve infobox6(boxcount)
-                infobox6(boxcount) = New TextBox
-                infobox6(boxcount).Left = 145
-                infobox6(boxcount).Top = 17
-                infobox6(boxcount).Width = 48
-                infobox6(boxcount).Height = 20
+                infobox6(boxcount) = New TextBox With {
+                    .Left = 145,
+                    .Top = 17,
+                    .Width = 48,
+                    .Height = 20
+                }
                 machinebox(boxcount).Controls.Add(infobox6(boxcount))
 
                 ReDim Preserve cmdbtn(boxcount)
-                cmdbtn(boxcount) = New Button
-                cmdbtn(boxcount).Text = "Show"
-                cmdbtn(boxcount).Left = 154
-                cmdbtn(boxcount).Top = 213
-                cmdbtn(boxcount).Width = 42
-                cmdbtn(boxcount).Height = 23
+                cmdbtn(boxcount) = New Button With {
+                    .Text = "Show",
+                    .Left = 154,
+                    .Top = 213,
+                    .Width = 42,
+                    .Height = 23
+                }
                 machinebox(boxcount).Controls.Add(cmdbtn(boxcount))
 
                 boxcount += 1
@@ -342,5 +353,10 @@
 
             machinebox(z).Refresh()
         Next
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Me.Hide()
+        Form2.Show()
     End Sub
 End Class
