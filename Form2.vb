@@ -51,6 +51,12 @@
     Public StatusChange As DataColumn = CurrentDate.Columns.Add("OnOff", Type.GetType("System.Boolean"))
 
     Private Sub GroupBox_Paint(sender As Object, e As PaintEventArgs)
+
+        Dim rulepen As New Pen(Brushes.Violet, 1)
+        For x% = 15 To 1215 Step 100
+            e.Graphics.DrawLine(rulepen, x%, 0, x%, 45)
+        Next
+
         Dim redpen As New Pen(Color.Red, 15)
         Dim yellowpen As New Pen(Color.Yellow, 15)
         Dim greenpen As New Pen(Color.LimeGreen, 15)
@@ -265,10 +271,11 @@
         Loop
         boxtally = boxcount - 1
 
-        Dim rulepen As New Pen(Brushes.Violet, 1)
-        For x% = 0 To 1200 Step 100
-            Me.CreateGraphics.DrawLine(rulepen, x%, 10, x%, 700)
-        Next
+        'Dim pagegraphics As Graphics = FlowLayoutPanel1.CreateGraphics
+        'Dim rulepen As New Pen(Brushes.Violet, 1)
+        'For x% = 0 To 1200 Step 100
+        '    pagegraphics.DrawLine(rulepen, x%, 10, x%, 700)
+        'Next
 
 
 
