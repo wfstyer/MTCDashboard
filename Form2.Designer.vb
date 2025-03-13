@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form2
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form2
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form2))
@@ -31,8 +31,8 @@ Partial Class Form2
         Me.Button1 = New System.Windows.Forms.Button()
         Me.WorkcenterlistTableAdapter = New MTCDashboard.DataSet1TableAdapters.workcenterlistTableAdapter()
         Me.DataSet1 = New MTCDashboard.DataSet1()
-        Me.MtcMasterTableAdapter = New MTCDashboard.DataSet1TableAdapters.MTCMasterTableAdapter()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.MtcMasterTableAdapter = New MTCDashboard.DataSet1TableAdapters.MTCMasterTableAdapter()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -87,16 +87,16 @@ Partial Class Form2
         Me.DataSet1.DataSetName = "DataSet1"
         Me.DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'MtcMasterTableAdapter
-        '
-        Me.MtcMasterTableAdapter.ClearBeforeFill = True
-        '
         'TextBox1
         '
         Me.TextBox1.Location = New System.Drawing.Point(1270, 427)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(70, 20)
         Me.TextBox1.TabIndex = 4
+        '
+        'MtcMasterTableAdapter
+        '
+        Me.MtcMasterTableAdapter.ClearBeforeFill = True
         '
         'Form2
         '

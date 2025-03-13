@@ -35,6 +35,10 @@
     Public linend As Integer
     Public linecolor As Integer
 
+    Public segmentend(999) As Single
+    Public segmentcolor(999) As Integer
+    Public segmentcount As Integer
+
     Public Machinelist As New DataTable
     Public chosen As DataColumn = Machinelist.Columns.Add("Display", Type.GetType("System.Boolean"))
     Public ID As DataColumn = Machinelist.Columns.Add("ID", Type.GetType("System.String"))
@@ -47,32 +51,22 @@
     Public StatusChange As DataColumn = CurrentDate.Columns.Add("OnOff", Type.GetType("System.Boolean"))
 
     Private Sub GroupBox_Paint(sender As Object, e As PaintEventArgs)
-        'Dim rect As New Rectangle(30, 55, 140, 140)
-        'Create start and sweep angles on ellipse.
-        'Dim firstAngle As Single = 0F
-        'Using grnbrush As New SolidBrush(Color.LimeGreen)
-        '    e.Graphics.FillPie(grnbrush, rect, 0, grnAngle(z))
-        'End Using
-        'Using yelbrush As New SolidBrush(Color.Yellow)
-        '    e.Graphics.FillPie(yelbrush, rect, grnAngle(z), yelAngle(z))
-        'End Using
+        Dim redpen As New Pen(Color.Red, 15)
+        Dim yellowpen As New Pen(Color.Yellow, 15)
+        Dim greenpen As New Pen(Color.LimeGreen, 15)
+        For x% = 1 To segmentcount
+            Select Case segmentcolor(x%)
+                Case 1
+                    e.Graphics.DrawLine(redpen, segmentend(x% - 1) + 15, 23, segmentend(x%) + 15, 23)
+                Case 2
+                    e.Graphics.DrawLine(yellowpen, segmentend(x% - 1) + 15, 23, segmentend(x%) + 15, 23)
+                Case 3
+                    e.Graphics.DrawLine(greenpen, segmentend(x% - 1) + 15, 23, segmentend(x%) + 15, 23)
+                Case Else
+                    ' nothing
+            End Select
+        Next
 
-        Select Case linecolor
-            Case 1
-                Using redline As New Pen(Color.Red, 15)
-                    e.Graphics.DrawLine(redline, linestart + 15, 23, linend + 15, 23)
-                End Using
-            Case 2
-                Using redline As New Pen(Color.Yellow, 15)
-                    e.Graphics.DrawLine(redline, linestart + 15, 23, linend + 15, 23)
-                End Using
-            Case 3
-                Using redline As New Pen(Color.LimeGreen, 15)
-                    e.Graphics.DrawLine(redline, linestart + 15, 23, linend + 15, 23)
-                End Using
-            Case Else
-                ' nothing
-        End Select
     End Sub
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -270,6 +264,15 @@
             intCursor += 1
         Loop
         boxtally = boxcount - 1
+
+        Dim rulepen As New Pen(Brushes.Violet, 1)
+        For x% = 0 To 1200 Step 100
+            Me.CreateGraphics.DrawLine(rulepen, x%, 10, x%, 700)
+        Next
+
+
+
+
         Timer1.Enabled = True
     End Sub
 
@@ -301,15 +304,14 @@
         '        TextBox1.Text = linend
 
         For z% = 1 To boxtally
-            Dim Interval As TimeSpan = Now - shiftstart
-            linend = Int(Interval.TotalHours * 100)
+            segmentcount = 1
             Dim onflag As Boolean
             Dim onmem As Boolean = True
             Dim onmachine As Boolean
             Dim lastime As Date = shiftstart
             Dim changetime As Date
             Dim tallytime As TimeSpan
-            linestart = 0
+            segmentend(segmentcount) = 0
 
             Dim searchvalue = Trim(chosenmachines(z))
             For i% = 0 To CurrentDate.Rows.Count - 1
@@ -327,28 +329,28 @@
                         If onflag Xor onmem Then
                             onmem = onflag
                             If onmem Then
-                                linecolor = 3
+                                segmentcolor(segmentcount) = 2
                             Else
-                                linecolor = 2
+                                segmentcolor(segmentcount) = 3
                             End If
                             tallytime = changetime - lastime
-                            linend = Int(tallytime.TotalHours * 100)
-                            machinebox(z).Refresh()
+                            segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100
                             lastime = changetime
-                            linestart = linend
+                            segmentcount += 1
+                            segmentcolor(segmentcount) = 1
                         Else
                             ' nothing
                         End If
                     End If
                 End If
             Next
-            If onmachine Then
-                ' nothing
-            Else
-                linecolor = 1
-                machinebox(z).Refresh()
-            End If
+            Dim Interval As TimeSpan = Now - shiftstart
+            segmentend(segmentcount) = Interval.TotalHours * 100
+            segmentcolor(segmentcount) = 1
+            machinebox(z).Refresh()
             onmachine = False
+            Array.Clear(segmentend, 0, 999)
+            Array.Clear(segmentcolor, 0, 999)
         Next
 
         'Dim searchtext = "WCID = '" + searchvalue + "'"
