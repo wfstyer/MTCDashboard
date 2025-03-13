@@ -32,6 +32,7 @@ Partial Class Form2
         Me.WorkcenterlistTableAdapter = New MTCDashboard.DataSet1TableAdapters.workcenterlistTableAdapter()
         Me.DataSet1 = New MTCDashboard.DataSet1()
         Me.MtcMasterTableAdapter = New MTCDashboard.DataSet1TableAdapters.MTCMasterTableAdapter()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -51,7 +52,7 @@ Partial Class Form2
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(65, 23)
         Me.Button2.TabIndex = 1
-        Me.Button2.Text = "View"
+        Me.Button2.Text = "Exit"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Timer1
@@ -90,12 +91,20 @@ Partial Class Form2
         '
         Me.MtcMasterTableAdapter.ClearBeforeFill = True
         '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(1270, 427)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(70, 20)
+        Me.TextBox1.TabIndex = 4
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1344, 801)
         Me.ControlBox = False
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button2)
@@ -106,6 +115,7 @@ Partial Class Form2
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -117,4 +127,5 @@ Partial Class Form2
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Button1 As Button
     Friend WithEvents MtcMasterTableAdapter As DataSet1TableAdapters.MTCMasterTableAdapter
+    Friend WithEvents TextBox1 As TextBox
 End Class

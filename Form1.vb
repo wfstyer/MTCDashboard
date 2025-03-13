@@ -320,6 +320,11 @@
             End If
 
             Dim offtime As Integer
+
+            If idletime + cycletime > totaltime Then
+                idletime = totaltime - cycletime
+            End If
+
             offtime = totaltime - idletime - cycletime
 
             grnAngle(z) = 360 * (cycletime / totaltime)

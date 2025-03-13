@@ -31,6 +31,10 @@
     Public yelAngle(99) As Single
     Public redAngle(99) As Single
 
+    Public linestart As Integer
+    Public linend As Integer
+    Public linecolor As Integer
+
     Public Machinelist As New DataTable
     Public chosen As DataColumn = Machinelist.Columns.Add("Display", Type.GetType("System.Boolean"))
     Public ID As DataColumn = Machinelist.Columns.Add("ID", Type.GetType("System.String"))
@@ -52,13 +56,26 @@
         'Using yelbrush As New SolidBrush(Color.Yellow)
         '    e.Graphics.FillPie(yelbrush, rect, grnAngle(z), yelAngle(z))
         'End Using
-        Using redline As New Pen(Color.Red, 15)
-            e.Graphics.DrawLine(redline, 15, 23, 1215, 23)
-        End Using
 
+        Select Case linecolor
+            Case 1
+                Using redline As New Pen(Color.Red, 15)
+                    e.Graphics.DrawLine(redline, linestart + 15, 23, linend + 15, 23)
+                End Using
+            Case 2
+                Using redline As New Pen(Color.Yellow, 15)
+                    e.Graphics.DrawLine(redline, linestart + 15, 23, linend + 15, 23)
+                End Using
+            Case 3
+                Using redline As New Pen(Color.LimeGreen, 15)
+                    e.Graphics.DrawLine(redline, linestart + 15, 23, linend + 15, 23)
+                End Using
+            Case Else
+                ' nothing
+        End Select
     End Sub
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WorkcenterlistTableAdapter.ClearBeforeFill = True
         Me.WorkcenterlistTableAdapter.Fill(Me.DataSet1.workcenterlist)
 
@@ -79,18 +96,20 @@
                 j$ = Trim(stringreader)
                 If Val(j$) < 1 Then Exit Do
                 machchoice(Val(j$)) = True
-                chosenmachines(i%) = j$
                 i% += 1
             Loop
             filereader.Dispose()
         End If
 
+        Dim k% = 1
         Dim intCursor% = 0
         Do Until intCursor = DataSet1.workcenterlist.Rows.Count
             Dim workrow As DataRow = Machinelist.NewRow
             workrow(ID) = DataSet1.workcenterlist.Item(intCursor).ID
             If machchoice(Int(workrow(ID))) Then
                 workrow(chosen) = True
+                chosenmachines(k%) = DataSet1.workcenterlist.Item(intCursor).WCID
+                k% += 1
             Else
                 workrow(chosen) = False
             End If
@@ -258,90 +277,138 @@
         Me.WorkcenterlistTableAdapter.Fill(Me.DataSet1.workcenterlist)
         Me.MtcMasterTableAdapter.ClearBeforeFill = True
         Me.MtcMasterTableAdapter.FillByToday(Me.DataSet1.MTCMaster)
+        CurrentDate.Clear()
 
-
-        For i% = 0 To DataSet1.MTCMaster.Rows.Count
+        For i% = 0 To DataSet1.MTCMaster.Rows.Count - 1
             Dim workrow As DataRow = CurrentDate.NewRow
-            workrow(WorkCID) = DataSet1.MTCMaster.Item(i%).WCID
+            workrow(WorkCID) = Trim(DataSet1.MTCMaster.Item(i%).WCID)
             workrow(MarkTime) = DataSet1.MTCMaster.Item(i%).Nowtime
             workrow(StatusChange) = DataSet1.MTCMaster.Item(i%).Running
+            CurrentDate.Rows.Add(workrow)
         Next
 
-        'Dim pagegraphics As Graphics = Me.CreateGraphics
-        'pagegraphics.Clear(Color.White)
 
         'Dim rulepen As New Pen(Brushes.Violet, 1)
 
 
-        'Dim totaltime As Int32
+
+        'Dim totaltime As Double
         'Dim idletime As Int32
         'Dim cycletime As Int32
-        'totaltime = DateDiff(DateInterval.Second, shiftstart, Now)
+
+        'totaltime = DateDiff(DateInterval.Hour, shiftstart, Now)
+
+        '        TextBox1.Text = linend
 
         For z% = 1 To boxtally
+            Dim Interval As TimeSpan = Now - shiftstart
+            linend = Int(Interval.TotalHours * 100)
+            Dim onflag As Boolean
+            Dim onmem As Boolean = True
+            Dim onmachine As Boolean
+            Dim lastime As Date = shiftstart
+            Dim changetime As Date
+            Dim tallytime As TimeSpan
+            linestart = 0
 
-
-            '    Dim searchvalue = chosenmachines(z)
-            '    Dim searchtext = "ID = '" + searchvalue + "'"
-            '    Dim myrow() As DataRow
-            '    myrow = DataSet1.workcenterlist.Select(searchtext)
-            '    idletime = Val(myrow(0)("Idle_Time"))
-            '    cycletime = Val(myrow(0)("Run_Time"))
-            '    Dim machineon As Boolean = myrow(0)("Available")
-            '    Dim machinerunning As Boolean = myrow(0)("Running")
-            '    If machinerunning Then
-            '        ' running
-            '        infobox1(z).BackColor = Color.White
-            '        infobox2(z).BackColor = Color.White
-            '        infobox3(z).BackColor = Color.LimeGreen
-            '    Else
-            '        If machineon Then
-            '            ' idle
-            '            infobox1(z).BackColor = Color.White
-            '            infobox2(z).BackColor = Color.Yellow
-            '            infobox3(z).BackColor = Color.White
-            '        Else
-            '            ' off
-            '            infobox1(z).BackColor = Color.Red
-            '            infobox2(z).BackColor = Color.White
-            '            infobox3(z).BackColor = Color.White
-            '        End If
-            '    End If
-
-            '    Dim offtime As Integer
-            '    offtime = totaltime - idletime - cycletime
-
-            '    grnAngle(z) = 360 * (cycletime / totaltime)
-            '    yelAngle(z) = 360 * (idletime / totaltime)
-            '    redAngle(z) = 360 - grnAngle(z) - yelAngle(z)
-
-            '    Dim iminutestoseconds As Int32 = idletime
-            '    Dim ihms = TimeSpan.FromSeconds(iminutestoseconds)
-            '    Dim ihr = Format(ihms.Hours, "#0")
-            '    Dim imin = Format(ihms.Minutes, "00")
-            '    Dim isec = Format(ihms.Seconds, "00")
-
-            '    Dim cminutestoseconds As Int32 = cycletime
-            '    Dim chms = TimeSpan.FromSeconds(cminutestoseconds)
-            '    Dim chr = Format(chms.Hours, "#0")
-            '    Dim cmin = Format(chms.Minutes, "00")
-            '    Dim csec = Format(chms.Seconds, "00")
-
-            '    Dim ominutestoseconds As Int32 = offtime
-            '    Dim ohms = TimeSpan.FromSeconds(ominutestoseconds)
-            '    Dim ohr = Format(ohms.Hours, "#0")
-            '    Dim omin = Format(ohms.Minutes, "00")
-            '    Dim osec = Format(ohms.Seconds, "00")
-
-            '    infobox1(z).Text = ohr + ":" + omin + ":" + osec
-            '    infobox2(z).Text = ihr + ":" + imin + ":" + isec
-            '    infobox3(z).Text = chr + ":" + cmin + ":" + csec
-            '    infobox4(z).Text = myrow(0)("Jobno")
-            '    infobox5(z).Text = myrow(0)("Opno")
-            '    infobox6(z).Text = myrow(0)("Count")
-
-            machinebox(z).Refresh()
+            Dim searchvalue = Trim(chosenmachines(z))
+            For i% = 0 To CurrentDate.Rows.Count - 1
+                If CurrentDate.Rows(i%)(WorkCID) = searchvalue Then
+                    onmachine = True
+                    changetime = CurrentDate.Rows(i%)(MarkTime)
+                    If changetime < shiftstart Then
+                        ' nothing
+                    Else
+                        If CurrentDate.Rows(i%)(StatusChange) Then
+                            onflag = True
+                        Else
+                            onflag = False
+                        End If
+                        If onflag Xor onmem Then
+                            onmem = onflag
+                            If onmem Then
+                                linecolor = 3
+                            Else
+                                linecolor = 2
+                            End If
+                            tallytime = changetime - lastime
+                            linend = Int(tallytime.TotalHours * 100)
+                            machinebox(z).Refresh()
+                            lastime = changetime
+                            linestart = linend
+                        Else
+                            ' nothing
+                        End If
+                    End If
+                End If
+            Next
+            If onmachine Then
+                ' nothing
+            Else
+                linecolor = 1
+                machinebox(z).Refresh()
+            End If
+            onmachine = False
         Next
+
+        'Dim searchtext = "WCID = '" + searchvalue + "'"
+        'Dim myrow() As DataRow
+        'myrow = DataSet1.MTCMaster.Select(searchtext)
+        '    idletime = Val(myrow(0)("Idle_Time"))
+        '    cycletime = Val(myrow(0)("Run_Time"))
+        '    Dim machineon As Boolean = myrow(0)("Available")
+        '    Dim machinerunning As Boolean = myrow(0)("Running")
+        '    If machinerunning Then
+        '        ' running
+        '        infobox1(z).BackColor = Color.White
+        '        infobox2(z).BackColor = Color.White
+        '        infobox3(z).BackColor = Color.LimeGreen
+        '    Else
+        '        If machineon Then
+        '            ' idle
+        '            infobox1(z).BackColor = Color.White
+        '            infobox2(z).BackColor = Color.Yellow
+        '            infobox3(z).BackColor = Color.White
+        '        Else
+        '            ' off
+        '            infobox1(z).BackColor = Color.Red
+        '            infobox2(z).BackColor = Color.White
+        '            infobox3(z).BackColor = Color.White
+        '        End If
+        '    End If
+
+        '    Dim offtime As Integer
+        '    offtime = totaltime - idletime - cycletime
+
+        '    grnAngle(z) = 360 * (cycletime / totaltime)
+        '    yelAngle(z) = 360 * (idletime / totaltime)
+        '    redAngle(z) = 360 - grnAngle(z) - yelAngle(z)
+
+        '    Dim iminutestoseconds As Int32 = idletime
+        '    Dim ihms = TimeSpan.FromSeconds(iminutestoseconds)
+        '    Dim ihr = Format(ihms.Hours, "#0")
+        '    Dim imin = Format(ihms.Minutes, "00")
+        '    Dim isec = Format(ihms.Seconds, "00")
+
+        '    Dim cminutestoseconds As Int32 = cycletime
+        '    Dim chms = TimeSpan.FromSeconds(cminutestoseconds)
+        '    Dim chr = Format(chms.Hours, "#0")
+        '    Dim cmin = Format(chms.Minutes, "00")
+        '    Dim csec = Format(chms.Seconds, "00")
+
+        '    Dim ominutestoseconds As Int32 = offtime
+        '    Dim ohms = TimeSpan.FromSeconds(ominutestoseconds)
+        '    Dim ohr = Format(ohms.Hours, "#0")
+        '    Dim omin = Format(ohms.Minutes, "00")
+        '    Dim osec = Format(ohms.Seconds, "00")
+
+        '    infobox1(z).Text = ohr + ":" + omin + ":" + osec
+        '    infobox2(z).Text = ihr + ":" + imin + ":" + isec
+        '    infobox3(z).Text = chr + ":" + cmin + ":" + csec
+        '    infobox4(z).Text = myrow(0)("Jobno")
+        '    infobox5(z).Text = myrow(0)("Opno")
+        '    infobox6(z).Text = myrow(0)("Count")
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
