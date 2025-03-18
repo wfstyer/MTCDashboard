@@ -306,11 +306,12 @@
             Dim onmem As Boolean = True                                     ' - last running status
             'Dim onmachine As Boolean                                        ' - workcenter
             Dim lastime As Date = shiftstart                                ' - last time memory
+            Dim machineOn As Boolean                                        ' - is the machine available (ON)
             Dim changetime As Date
             Dim tallytime As TimeSpan
             segmentend(segmentcount) = 0                                    ' - line segment endpoint - starts at zero
             segmentcolor(segmentcount) = 1                                  ' - default line segment color is red
-            Dim colormem As Short = 1
+            Dim colormem As Short = 1                                       ' - set line segment color red
             Dim countstart As Integer = 0
             Dim searchvalue = Trim(chosenmachines(z))                       ' - go thru all displayed machines
             If CurrentDate.Rows(0)(MarkTime) > shiftstart Then              ' - if first record time > shift start 
@@ -325,7 +326,11 @@
             End If
             Dim currentrow As DataRow() = DataSet1.workcenterlist.Select("WCID = '" + searchvalue + "'")
             If currentrow(0)("Available") = True Then
-                colormem = 2              ' - set segment color yellow
+                colormem = 2                                                ' - set segment color yellow
+                machineOn = True
+            Else
+                colormem = 1                                                ' - set segment color red
+                machineOn = False
             End If
             For i% = countstart To CurrentDate.Rows.Count - 1
                 'colormem = 1
@@ -360,6 +365,9 @@
                     End If
                 End If
             Next
+            If Not machineOn Then
+                colormem = 1
+            End If
             Dim Interval As TimeSpan = Now - shiftstart
             segmentend(segmentcount) = Interval.TotalHours * 100
             segmentcolor(segmentcount) = colormem
