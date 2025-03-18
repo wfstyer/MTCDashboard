@@ -60,6 +60,7 @@
         Dim redpen As New Pen(Color.Red, 15)
         Dim yellowpen As New Pen(Color.Yellow, 15)
         Dim greenpen As New Pen(Color.LimeGreen, 15)
+        Dim graypen As New Pen(Color.DimGray, 15)
         For x% = 1 To segmentcount
             Select Case segmentcolor(x%)
                 Case 1
@@ -68,6 +69,8 @@
                     e.Graphics.DrawLine(yellowpen, segmentend(x% - 1) + 15, 23, segmentend(x%) + 15, 23)
                 Case 3
                     e.Graphics.DrawLine(greenpen, segmentend(x% - 1) + 15, 23, segmentend(x%) + 15, 23)
+                Case 4
+                    e.Graphics.DrawLine(graypen, segmentend(x% - 1) + 15, 23, segmentend(x%) + 15, 23)
                 Case Else
                     ' nothing
             End Select
@@ -286,65 +289,67 @@
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Me.WorkcenterlistTableAdapter.Fill(Me.DataSet1.workcenterlist)
         Me.MtcMasterTableAdapter.ClearBeforeFill = True
-        Me.MtcMasterTableAdapter.FillByToday(Me.DataSet1.MTCMaster)
-        CurrentDate.Clear()
+        Me.MtcMasterTableAdapter.FillByToday(Me.DataSet1.MTCMaster)         ' - get today's master data
+        CurrentDate.Clear()                                                 ' - clear memory datatable
 
         For i% = 0 To DataSet1.MTCMaster.Rows.Count - 1
-            Dim workrow As DataRow = CurrentDate.NewRow
-            workrow(WorkCID) = Trim(DataSet1.MTCMaster.Item(i%).WCID)
-            workrow(MarkTime) = DataSet1.MTCMaster.Item(i%).Nowtime
-            workrow(StatusChange) = DataSet1.MTCMaster.Item(i%).Running
+            Dim workrow As DataRow = CurrentDate.NewRow                     ' - working datatable
+            workrow(WorkCID) = Trim(DataSet1.MTCMaster.Item(i%).WCID)       ' - workcenter
+            workrow(MarkTime) = DataSet1.MTCMaster.Item(i%).Nowtime         ' - data timestamp
+            workrow(StatusChange) = DataSet1.MTCMaster.Item(i%).Running     ' - boolean - running or not (T/F)
             CurrentDate.Rows.Add(workrow)
         Next
 
-
-        'Dim rulepen As New Pen(Brushes.Violet, 1)
-
-
-
-        'Dim totaltime As Double
-        'Dim idletime As Int32
-        'Dim cycletime As Int32
-
-        'totaltime = DateDiff(DateInterval.Hour, shiftstart, Now)
-
-        '        TextBox1.Text = linend
-
-        For z% = 1 To boxtally
-            segmentcount = 1
-            Dim onflag As Boolean
-            Dim onmem As Boolean = True
-            Dim onmachine As Boolean
-            Dim lastime As Date = shiftstart
+        For z% = 1 To boxtally                                              ' - quantity of displayed machines
+            segmentcount = 1                                                ' - line segment count
+            Dim onflag As Boolean                                           ' - machine - running or not (T/F)
+            Dim onmem As Boolean = True                                     ' - last running status
+            'Dim onmachine As Boolean                                        ' - workcenter
+            Dim lastime As Date = shiftstart                                ' - last time memory
             Dim changetime As Date
             Dim tallytime As TimeSpan
-            segmentend(segmentcount) = 0
-
-            Dim searchvalue = Trim(chosenmachines(z))
-            For i% = 0 To CurrentDate.Rows.Count - 1
+            segmentend(segmentcount) = 0                                    ' - line segment endpoint - starts at zero
+            segmentcolor(segmentcount) = 1                                  ' - default line segment color is red
+            Dim colormem As Short = 1
+            Dim countstart As Integer = 0
+            Dim searchvalue = Trim(chosenmachines(z))                       ' - go thru all displayed machines
+            If CurrentDate.Rows(0)(MarkTime) > shiftstart Then              ' - if first record time > shift start 
+                segmentcolor(segmentcount) = 4                                                ' - make segment color gray 
+                changetime = CurrentDate.Rows(0)(MarkTime)                  ' - timestamp for status change
+                tallytime = changetime - lastime                            ' - calculate time since last status change
+                segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100    ' - calculate line segment end
+                lastime = changetime                                        ' - set last staus change time memory
+                segmentcount += 1                                           ' - increment line segment count
+                countstart = 1
+                colormem = 1
+            End If
+            For i% = countstart To CurrentDate.Rows.Count - 1
+                'colormem = 1
                 If CurrentDate.Rows(i%)(WorkCID) = searchvalue Then
-                    onmachine = True
-                    changetime = CurrentDate.Rows(i%)(MarkTime)
-                    If changetime < shiftstart Then
+                    'onmachine = True                                        ' - selected machine is available
+                    If CurrentDate.Rows(i%)(StatusChange) Then              ' - read running or not
+                        onflag = True                                       ' - set flag running
+                    Else
+                        onflag = False                                      ' - set flag not running
+                    End If
+                    changetime = CurrentDate.Rows(i%)(MarkTime)             ' - timestamp for status change
+                    If changetime < shiftstart Then                         ' - if timestamp before shiftstart - ignore it
                         ' nothing
                     Else
-                        If CurrentDate.Rows(i%)(StatusChange) Then
-                            onflag = True
-                        Else
-                            onflag = False
-                        End If
-                        If onflag Xor onmem Then
-                            onmem = onflag
-                            If onmem Then
-                                segmentcolor(segmentcount) = 2
+                        If onflag Xor onmem Then                            ' - if running status changed then
+                            onmem = onflag                                  ' - set last running status
+                            If onmem Then                                   ' - if last segment running then new color is yellow - not running, green
+                                segmentcolor(segmentcount) = 2              ' - set segment color yellow
+                                colormem = 3
                             Else
-                                segmentcolor(segmentcount) = 3
+                                segmentcolor(segmentcount) = 3              ' - set segment color green
+                                colormem = 2
                             End If
-                            tallytime = changetime - lastime
-                            segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100
-                            lastime = changetime
-                            segmentcount += 1
-                            segmentcolor(segmentcount) = 1
+                            tallytime = changetime - lastime                ' - calculate time since last status change
+                            segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100    ' - calculate line segment end
+                            lastime = changetime                            ' - set last staus change time memory
+                            segmentcount += 1                               ' - increment line segment count
+                            'segmentcolor(segmentcount) = 1
                         Else
                             ' nothing
                         End If
@@ -353,70 +358,12 @@
             Next
             Dim Interval As TimeSpan = Now - shiftstart
             segmentend(segmentcount) = Interval.TotalHours * 100
-            segmentcolor(segmentcount) = 1
+            segmentcolor(segmentcount) = colormem
             machinebox(z).Refresh()
-            onmachine = False
+            'onmachine = False
             Array.Clear(segmentend, 0, 999)
             Array.Clear(segmentcolor, 0, 999)
         Next
-
-        'Dim searchtext = "WCID = '" + searchvalue + "'"
-        'Dim myrow() As DataRow
-        'myrow = DataSet1.MTCMaster.Select(searchtext)
-        '    idletime = Val(myrow(0)("Idle_Time"))
-        '    cycletime = Val(myrow(0)("Run_Time"))
-        '    Dim machineon As Boolean = myrow(0)("Available")
-        '    Dim machinerunning As Boolean = myrow(0)("Running")
-        '    If machinerunning Then
-        '        ' running
-        '        infobox1(z).BackColor = Color.White
-        '        infobox2(z).BackColor = Color.White
-        '        infobox3(z).BackColor = Color.LimeGreen
-        '    Else
-        '        If machineon Then
-        '            ' idle
-        '            infobox1(z).BackColor = Color.White
-        '            infobox2(z).BackColor = Color.Yellow
-        '            infobox3(z).BackColor = Color.White
-        '        Else
-        '            ' off
-        '            infobox1(z).BackColor = Color.Red
-        '            infobox2(z).BackColor = Color.White
-        '            infobox3(z).BackColor = Color.White
-        '        End If
-        '    End If
-
-        '    Dim offtime As Integer
-        '    offtime = totaltime - idletime - cycletime
-
-        '    grnAngle(z) = 360 * (cycletime / totaltime)
-        '    yelAngle(z) = 360 * (idletime / totaltime)
-        '    redAngle(z) = 360 - grnAngle(z) - yelAngle(z)
-
-        '    Dim iminutestoseconds As Int32 = idletime
-        '    Dim ihms = TimeSpan.FromSeconds(iminutestoseconds)
-        '    Dim ihr = Format(ihms.Hours, "#0")
-        '    Dim imin = Format(ihms.Minutes, "00")
-        '    Dim isec = Format(ihms.Seconds, "00")
-
-        '    Dim cminutestoseconds As Int32 = cycletime
-        '    Dim chms = TimeSpan.FromSeconds(cminutestoseconds)
-        '    Dim chr = Format(chms.Hours, "#0")
-        '    Dim cmin = Format(chms.Minutes, "00")
-        '    Dim csec = Format(chms.Seconds, "00")
-
-        '    Dim ominutestoseconds As Int32 = offtime
-        '    Dim ohms = TimeSpan.FromSeconds(ominutestoseconds)
-        '    Dim ohr = Format(ohms.Hours, "#0")
-        '    Dim omin = Format(ohms.Minutes, "00")
-        '    Dim osec = Format(ohms.Seconds, "00")
-
-        '    infobox1(z).Text = ohr + ":" + omin + ":" + osec
-        '    infobox2(z).Text = ihr + ":" + imin + ":" + isec
-        '    infobox3(z).Text = chr + ":" + cmin + ":" + csec
-        '    infobox4(z).Text = myrow(0)("Jobno")
-        '    infobox5(z).Text = myrow(0)("Opno")
-        '    infobox6(z).Text = myrow(0)("Count")
 
     End Sub
 
