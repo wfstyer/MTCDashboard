@@ -323,6 +323,10 @@
                 countstart = 1
                 colormem = 1
             End If
+            Dim currentrow As DataRow() = DataSet1.workcenterlist.Select("WCID = '" + searchvalue + "'")
+            If currentrow(0)("Available") = True Then
+                colormem = 2              ' - set segment color yellow
+            End If
             For i% = countstart To CurrentDate.Rows.Count - 1
                 'colormem = 1
                 If CurrentDate.Rows(i%)(WorkCID) = searchvalue Then
