@@ -303,7 +303,7 @@
         For z% = 1 To boxtally                                              ' - quantity of displayed machines
             segmentcount = 1                                                ' - line segment count
             Dim onflag As Boolean                                           ' - machine - running or not (T/F)
-            Dim onmem As Boolean = True                                     ' - last running status
+            Dim onmem As Boolean ' = True                                     ' - last running status
             'Dim onmachine As Boolean                                        ' - workcenter
             Dim lastime As Date = shiftstart                                ' - last time memory
             Dim machineOn As Boolean                                        ' - is the machine available (ON)
@@ -315,7 +315,7 @@
             Dim countstart As Integer = 0
             Dim searchvalue = Trim(chosenmachines(z))                       ' - go thru all displayed machines
             If CurrentDate.Rows(0)(MarkTime) > shiftstart Then              ' - if first record time > shift start 
-                segmentcolor(segmentcount) = 4                                                ' - make segment color gray 
+                segmentcolor(segmentcount) = 4                              ' - make segment color gray 
                 changetime = CurrentDate.Rows(0)(MarkTime)                  ' - timestamp for status change
                 tallytime = changetime - lastime                            ' - calculate time since last status change
                 segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100    ' - calculate line segment end
@@ -376,6 +376,8 @@
             Array.Clear(segmentend, 0, 999)
             Array.Clear(segmentcolor, 0, 999)
         Next
+
+        DataGridView2.DataSource = CurrentDate
 
     End Sub
 
