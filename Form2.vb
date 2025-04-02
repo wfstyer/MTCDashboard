@@ -377,7 +377,7 @@
             Array.Clear(segmentcolor, 0, 999)
         Next
 
-        DataGridView2.DataSource = CurrentDate
+        'DataGridView2.DataSource = CurrentDate
 
     End Sub
 

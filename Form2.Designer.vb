@@ -231,12 +231,13 @@ Partial Class Form2
         Me.DataGridView2.RowHeadersVisible = False
         Me.DataGridView2.Size = New System.Drawing.Size(199, 668)
         Me.DataGridView2.TabIndex = 17
+        Me.DataGridView2.Visible = False
         '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1484, 801)
+        Me.ClientSize = New System.Drawing.Size(1344, 801)
         Me.ControlBox = False
         Me.Controls.Add(Me.DataGridView2)
         Me.Controls.Add(Me.Label13)
