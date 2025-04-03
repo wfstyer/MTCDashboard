@@ -303,8 +303,7 @@
         For z% = 1 To boxtally                                              ' - quantity of displayed machines
             segmentcount = 1                                                ' - line segment count
             Dim onflag As Boolean                                           ' - machine - running or not (T/F)
-            Dim onmem As Boolean ' = True                                     ' - last running status
-            'Dim onmachine As Boolean                                        ' - workcenter
+            Dim onmem As Boolean                                            ' - last running status
             Dim lastime As Date = shiftstart                                ' - last time memory
             Dim machineOn As Boolean                                        ' - is the machine available (ON)
             Dim changetime As Date
