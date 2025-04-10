@@ -61,12 +61,23 @@
     End Sub
 
     Private Sub Cmdbtn_Click(sender As Object, e As EventArgs)
+        Dim agentaddress As String
         machident = sender.Text
         Dim searchvalue As String = "WCID = '" + machident + "'"
         Dim foundrow() As DataRow
         foundrow = DataSet1.workcenterlist.Select(searchvalue)
-        netaddress = foundrow(0)("PING_IP")
-        Dim agentaddress As String = foundrow(0)("AGENT_IP")
+        If IsDBNull(foundrow(0)("PING_IP")) Then
+            MsgBox("Machine Not Avilable.")
+            Exit Sub
+        Else
+            netaddress = foundrow(0)("PING_IP")
+        End If
+        If IsDBNull(foundrow(0)("AGENT_IP")) Then
+            MsgBox("Machine Not Avilable.")
+            Exit Sub
+        Else
+            agentaddress = foundrow(0)("AGENT_IP")
+        End If
         Dim machdescript As String = foundrow(0)("DESCRIPTION")
         machident += " : " + machdescript
         machdatasource = "http://" + agentaddress + "/current"
