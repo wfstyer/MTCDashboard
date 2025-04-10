@@ -18,7 +18,7 @@
     Public infobox5(-1) As TextBox
     Public infobox6(-1) As TextBox
 
-    Public cmdbtn(-1) As Button
+    Public Cmdbtn(-1) As Button
 
     Public infolbl1(-1) As Label
     Public infolbl2(-1) As Label
@@ -31,11 +31,18 @@
     Public yelAngle(99) As Single
     Public redAngle(99) As Single
 
+    Public machident As String
+    Public netaddress As String
+    Public agentaddress As String
+    Public machdatasource As String
+
     Public Machinelist As New DataTable
     Public chosen As DataColumn = Machinelist.Columns.Add("Display", Type.GetType("System.Boolean"))
     Public ID As DataColumn = Machinelist.Columns.Add("ID", Type.GetType("System.String"))
     Public workcenter As DataColumn = Machinelist.Columns.Add("WCID", Type.GetType("System.String"))
     Public descript As DataColumn = Machinelist.Columns.Add("Description", Type.GetType("System.String"))
+    Public pingaddress As DataColumn = Machinelist.Columns.Add("PingAddress", Type.GetType("System.String"))
+    Public agent_IP As DataColumn = Machinelist.Columns.Add("AgentAddress", Type.GetType("System.String"))
 
     Private Sub GroupBox_Paint(sender As Object, e As PaintEventArgs)
         Dim rect As New Rectangle(30, 55, 140, 140)
@@ -50,6 +57,27 @@
         Using redbrush As New SolidBrush(Color.Red)
             e.Graphics.FillPie(redbrush, rect, grnAngle(z) + yelAngle(z), redAngle(z))
         End Using
+
+    End Sub
+
+    Private Sub Cmdbtn_Click(sender As Object, e As EventArgs)
+        machident = sender.Text
+        Dim searchvalue As String = "WCID = '" + machident + "'"
+        Dim foundrow() As DataRow
+        foundrow = DataSet1.workcenterlist.Select(searchvalue)
+        netaddress = foundrow(0)("PING_IP")
+        Dim agentaddress As String = foundrow(0)("AGENT_IP")
+        Dim machdescript As String = foundrow(0)("DESCRIPTION")
+        machident += " : " + machdescript
+        machdatasource = "http://" + agentaddress + "/current"
+
+        If My.Computer.Network.Ping(netaddress) Then
+            Frm_Unit_Monitor.Show()
+            'MsgBox("Server pinged successfully.")
+        Else
+            MsgBox("Machine Not Avilable.")
+            Exit Sub
+        End If
 
     End Sub
 
@@ -91,6 +119,16 @@
             End If
             workrow(workcenter) = DataSet1.workcenterlist.Item(intCursor).WCID
             workrow(descript) = DataSet1.workcenterlist.Item(intCursor).DESCRIPTION
+            If DataSet1.workcenterlist.Item(intCursor).IsPING_IPNull Then
+                workrow(pingaddress) = ""
+            Else
+                workrow(pingaddress) = DataSet1.workcenterlist.Item(intCursor).PING_IP
+            End If
+            If DataSet1.workcenterlist.Item(intCursor).IsAGENT_IPNull Then
+                workrow(agent_IP) = ""
+            Else
+                workrow(agent_IP) = DataSet1.workcenterlist.Item(intCursor).AGENT_IP
+            End If
             Machinelist.Rows.Add(workrow)
             intCursor += 1
         Loop
@@ -231,15 +269,17 @@
                 }
                 machinebox(boxcount).Controls.Add(infobox6(boxcount))
 
-                ReDim Preserve cmdbtn(boxcount)
-                cmdbtn(boxcount) = New Button With {
-                    .Text = "Show",
+                ReDim Preserve Cmdbtn(boxcount)
+                Cmdbtn(boxcount) = New Button With {
+                    .Text = wc,
                     .Left = 154,
                     .Top = 213,
                     .Width = 42,
                     .Height = 23
                 }
-                machinebox(boxcount).Controls.Add(cmdbtn(boxcount))
+                machinebox(boxcount).Controls.Add(Cmdbtn(boxcount))
+
+                AddHandler Cmdbtn(boxcount).Click, AddressOf Cmdbtn_Click
 
                 boxcount += 1
             End If
