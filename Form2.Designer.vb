@@ -256,6 +256,7 @@ Partial Class Form2
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.FlowLayoutPanel1)
+        Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form2"
         Me.Text = "MTConnect DashBoard"
