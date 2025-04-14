@@ -1,5 +1,8 @@
 ﻿Public Class Frm_Unit_Monitor
 
+    Dim machineping As String
+    Dim machinecall As String
+
     Dim yPos% = 418
     Dim Spindleload% = 418
     Dim S2rpm% = 418
@@ -29,7 +32,7 @@
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
-        If My.Computer.Network.Ping(Form1.netaddress) Then
+        If My.Computer.Network.Ping(machineping) Then
             ' nothing
         Else
             Exit Sub
@@ -39,7 +42,7 @@
         ' add partname to display ? *********************************************************************************************
 
         DataSet14.Clear()
-        DataSet14.ReadXml(Form1.machdatasource)
+        DataSet14.ReadXml(machinecall)
         TextBox1.Text = DataSet14.Tables("RotaryVelocity").Rows(0).Item(4)
         TextBox12.Text = DataSet14.Tables("RotaryVelocity").Rows(2).Item(4)
         yPos = 419 - Int(DataSet14.Tables("RotaryVelocity").Rows(0).Item(4) / 13)
@@ -119,7 +122,9 @@
 
     Private Sub Frm_Unit_Monitor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = Form1.machident
-        If My.Computer.Network.Ping(Form1.netaddress) Then
+        machineping = Form1.netaddress
+        machinecall = Form1.machdatasource
+        If My.Computer.Network.Ping(machineping) Then
             Timer1.Enabled = True
         Else
             MsgBox("Machine Not Avilable.")
