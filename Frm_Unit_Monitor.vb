@@ -43,6 +43,8 @@
 
         DataSet14.Clear()
         DataSet14.ReadXml(machinecall)
+        'DataGridView1.DataSource = DataSet14
+
         TextBox1.Text = DataSet14.Tables("RotaryVelocity").Rows(0).Item(4)
         TextBox12.Text = DataSet14.Tables("RotaryVelocity").Rows(2).Item(4)
         yPos = 419 - Int(DataSet14.Tables("RotaryVelocity").Rows(0).Item(4) / 13)
@@ -125,6 +127,12 @@
         machineping = Form1.netaddress
         machinecall = Form1.machdatasource
         If My.Computer.Network.Ping(machineping) Then
+
+            'DataSet14.Clear()
+            'DataSet14.ReadXml(machinecall)
+            'DataGridView1.DataSource = DataSet14
+            'DataGridView1.Refresh()
+
             Timer1.Enabled = True
         Else
             MsgBox("Machine Not Avilable.")

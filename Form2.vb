@@ -315,11 +315,11 @@
             Dim searchvalue = Trim(chosenmachines(z))                       ' - go thru all displayed machines
             If CurrentDate.Rows(0)(MarkTime) > shiftstart Then              ' - if first record time > shift start 
                 segmentcolor(segmentcount) = 4                              ' - make segment color gray 
+                segmentcount = 2                                            ' - increment line segment count
                 changetime = CurrentDate.Rows(0)(MarkTime)                  ' - timestamp for status change
                 tallytime = changetime - lastime                            ' - calculate time since last status change
-                segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100    ' - calculate line segment end
-                lastime = changetime                                        ' - set last staus change time memory
-                segmentcount += 1                                           ' - increment line segment count
+                segmentend(segmentcount) = tallytime.TotalHours * 100       ' - calculate line segment end
+                lastime = changetime                                        ' - set last status change time memory
                 countstart = 1
                 colormem = 1
             End If
@@ -334,7 +334,6 @@
             For i% = countstart To CurrentDate.Rows.Count - 1
                 'colormem = 1
                 If CurrentDate.Rows(i%)(WorkCID) = searchvalue Then
-                    'onmachine = True                                        ' - selected machine is available
                     If CurrentDate.Rows(i%)(StatusChange) Then              ' - read running or not
                         onflag = True                                       ' - set flag running
                     Else
@@ -355,7 +354,7 @@
                             End If
                             tallytime = changetime - lastime                ' - calculate time since last status change
                             segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100    ' - calculate line segment end
-                            lastime = changetime                            ' - set last staus change time memory
+                            lastime = changetime                            ' - set last status change time memory
                             segmentcount += 1                               ' - increment line segment count
                             'segmentcolor(segmentcount) = 1
                         Else
@@ -365,18 +364,16 @@
                 End If
             Next
             If Not machineOn Then
-                colormem = 1
+                colormem = 1                                                ' - set segment color red
             End If
             Dim Interval As TimeSpan = Now - shiftstart
             segmentend(segmentcount) = Interval.TotalHours * 100
             segmentcolor(segmentcount) = colormem
             machinebox(z).Refresh()
-            'onmachine = False
             Array.Clear(segmentend, 0, 999)
             Array.Clear(segmentcolor, 0, 999)
-        Next
 
-        'DataGridView2.DataSource = CurrentDate
+        Next
 
     End Sub
 
