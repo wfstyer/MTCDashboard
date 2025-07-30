@@ -141,4 +141,13 @@
         End If
     End Sub
 
+    Private Sub TextBox9_DoubleClick(sender As Object, e As EventArgs) Handles TextBox9.DoubleClick
+        ' doubleclick to get individual job screen
+        FrmJobView.searchjobnumber = Trim(TextBox9.Text)
+        FrmJobView.TextBox1.Text = Trim(TextBox9.Text)
+        FrmJobView.Show()
+        FrmJobView.Button1.Focus()
+        FrmJobView.Button1.PerformClick()
+
+    End Sub
 End Class

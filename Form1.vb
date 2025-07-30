@@ -416,4 +416,19 @@
         Form2.Show()
         Me.Hide()
     End Sub
+
+    'Private Sub infobox_DoubleClick(sender As Object, e As EventArgs) Handles infobox.DoubleClick
+    '    ' doubleclick to get individual job screen
+    '    FrmJobView.searchjobnumber = Trim(infobox.Text)
+    '    FrmJobView.TextBox1.Text = Trim(infobox.Text)
+    '    FrmJobView.Show()
+    '    FrmJobView.Button1.Focus()
+    '    FrmJobView.Button1.PerformClick()
+
+    'End Sub
+
+
+
+
+
 End Class

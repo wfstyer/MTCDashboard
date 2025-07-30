@@ -29,6 +29,8 @@ Partial Public Class DataSet1
     
     Private tableworkcenterlist As workcenterlistDataTable
     
+    Private tableJodrtg As JodrtgDataTable
+    
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -64,6 +66,9 @@ Partial Public Class DataSet1
             If (Not (ds.Tables("workcenterlist")) Is Nothing) Then
                 MyBase.Tables.Add(New workcenterlistDataTable(ds.Tables("workcenterlist")))
             End If
+            If (Not (ds.Tables("Jodrtg")) Is Nothing) Then
+                MyBase.Tables.Add(New JodrtgDataTable(ds.Tables("Jodrtg")))
+            End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
             Me.Namespace = ds.Namespace
@@ -98,6 +103,16 @@ Partial Public Class DataSet1
     Public ReadOnly Property workcenterlist() As workcenterlistDataTable
         Get
             Return Me.tableworkcenterlist
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property Jodrtg() As JodrtgDataTable
+        Get
+            Return Me.tableJodrtg
         End Get
     End Property
     
@@ -174,6 +189,9 @@ Partial Public Class DataSet1
             If (Not (ds.Tables("workcenterlist")) Is Nothing) Then
                 MyBase.Tables.Add(New workcenterlistDataTable(ds.Tables("workcenterlist")))
             End If
+            If (Not (ds.Tables("Jodrtg")) Is Nothing) Then
+                MyBase.Tables.Add(New JodrtgDataTable(ds.Tables("Jodrtg")))
+            End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
             Me.Namespace = ds.Namespace
@@ -218,6 +236,12 @@ Partial Public Class DataSet1
                 Me.tableworkcenterlist.InitVars
             End If
         End If
+        Me.tableJodrtg = CType(MyBase.Tables("Jodrtg"),JodrtgDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableJodrtg) Is Nothing) Then
+                Me.tableJodrtg.InitVars
+            End If
+        End If
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -232,6 +256,8 @@ Partial Public Class DataSet1
         MyBase.Tables.Add(Me.tableMTCMaster)
         Me.tableworkcenterlist = New workcenterlistDataTable()
         MyBase.Tables.Add(Me.tableworkcenterlist)
+        Me.tableJodrtg = New JodrtgDataTable()
+        MyBase.Tables.Add(Me.tableJodrtg)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -243,6 +269,12 @@ Partial Public Class DataSet1
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
     Private Function ShouldSerializeworkcenterlist() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+    Private Function ShouldSerializeJodrtg() As Boolean
         Return false
     End Function
     
@@ -309,6 +341,9 @@ Partial Public Class DataSet1
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
     Public Delegate Sub workcenterlistRowChangeEventHandler(ByVal sender As Object, ByVal e As workcenterlistRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+    Public Delegate Sub JodrtgRowChangeEventHandler(ByVal sender As Object, ByVal e As JodrtgRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -1116,6 +1151,611 @@ Partial Public Class DataSet1
     End Class
     
     '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class JodrtgDataTable
+        Inherits Global.System.Data.TypedTableBase(Of JodrtgRow)
+        
+        Private columnfjobno As Global.System.Data.DataColumn
+        
+        Private columnfoperno As Global.System.Data.DataColumn
+        
+        Private columnfstrtdate As Global.System.Data.DataColumn
+        
+        Private columnfopermemo As Global.System.Data.DataColumn
+        
+        Private columnfpro_id As Global.System.Data.DataColumn
+        
+        Private columnfprod_tim As Global.System.Data.DataColumn
+        
+        Private columnflastlab As Global.System.Data.DataColumn
+        
+        Private columnfnsh_date As Global.System.Data.DataColumn
+        
+        Private columnfpartno As Global.System.Data.DataColumn
+        
+        Private columnfsono As Global.System.Data.DataColumn
+        
+        Private columnfstatus As Global.System.Data.DataColumn
+        
+        Private columnfact_rel As Global.System.Data.DataColumn
+        
+        Private columnfcompany As Global.System.Data.DataColumn
+        
+        Private columnfddue_date As Global.System.Data.DataColumn
+        
+        Private columnfquantity As Global.System.Data.DataColumn
+        
+        Private columnfstrt_date As Global.System.Data.DataColumn
+        
+        Private columnfnqty_comp As Global.System.Data.DataColumn
+        
+        Private columnfnqty_togo As Global.System.Data.DataColumn
+        
+        Private columnfsetuptime As Global.System.Data.DataColumn
+        
+        Private columnfuprodtime As Global.System.Data.DataColumn
+        
+        Private columnidentity_column As Global.System.Data.DataColumn
+        
+        Private columnExpr1 As Global.System.Data.DataColumn
+        
+        Private columnExpr2 As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "Jodrtg"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fjobnoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfjobno
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fopernoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfoperno
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fstrtdateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfstrtdate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fopermemoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfopermemo
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fpro_idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfpro_id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fprod_timColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfprod_tim
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property flastlabColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnflastlab
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fnsh_dateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfnsh_date
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fpartnoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfpartno
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fsonoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfsono
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fstatusColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfstatus
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fact_relColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfact_rel
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fcompanyColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfcompany
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fddue_dateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfddue_date
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fquantityColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfquantity
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fstrt_dateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfstrt_date
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fnqty_compColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfnqty_comp
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fnqty_togoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfnqty_togo
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fsetuptimeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfsetuptime
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fuprodtimeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfuprodtime
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property identity_columnColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnidentity_column
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property Expr1Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnExpr1
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property Expr2Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnExpr2
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As JodrtgRow
+            Get
+                Return CType(Me.Rows(index),JodrtgRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Event JodrtgRowChanging As JodrtgRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Event JodrtgRowChanged As JodrtgRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Event JodrtgRowDeleting As JodrtgRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Event JodrtgRowDeleted As JodrtgRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Overloads Sub AddJodrtgRow(ByVal row As JodrtgRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Overloads Function AddJodrtgRow( _
+                    ByVal fjobno As String,  _
+                    ByVal foperno As Integer,  _
+                    ByVal fstrtdate As Date,  _
+                    ByVal fopermemo As String,  _
+                    ByVal fpro_id As String,  _
+                    ByVal fprod_tim As Decimal,  _
+                    ByVal flastlab As Date,  _
+                    ByVal fnsh_date As Date,  _
+                    ByVal fpartno As String,  _
+                    ByVal fsono As String,  _
+                    ByVal fstatus As String,  _
+                    ByVal fact_rel As Date,  _
+                    ByVal fcompany As String,  _
+                    ByVal fddue_date As Date,  _
+                    ByVal fquantity As Decimal,  _
+                    ByVal fstrt_date As Date,  _
+                    ByVal fnqty_comp As Decimal,  _
+                    ByVal fnqty_togo As Decimal,  _
+                    ByVal fsetuptime As Decimal,  _
+                    ByVal fuprodtime As Decimal,  _
+                    ByVal Expr2 As String) As JodrtgRow
+            Dim rowJodrtgRow As JodrtgRow = CType(Me.NewRow,JodrtgRow)
+            Dim columnValuesArray() As Object = New Object() {fjobno, foperno, fstrtdate, fopermemo, fpro_id, fprod_tim, flastlab, fnsh_date, fpartno, fsono, fstatus, fact_rel, fcompany, fddue_date, fquantity, fstrt_date, fnqty_comp, fnqty_togo, fsetuptime, fuprodtime, Nothing, Nothing, Expr2}
+            rowJodrtgRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowJodrtgRow)
+            Return rowJodrtgRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function FindByidentity_columnExpr1(ByVal identity_column As Integer, ByVal Expr1 As Integer) As JodrtgRow
+            Return CType(Me.Rows.Find(New Object() {identity_column, Expr1}),JodrtgRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As JodrtgDataTable = CType(MyBase.Clone,JodrtgDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New JodrtgDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnfjobno = MyBase.Columns("fjobno")
+            Me.columnfoperno = MyBase.Columns("foperno")
+            Me.columnfstrtdate = MyBase.Columns("fstrtdate")
+            Me.columnfopermemo = MyBase.Columns("fopermemo")
+            Me.columnfpro_id = MyBase.Columns("fpro_id")
+            Me.columnfprod_tim = MyBase.Columns("fprod_tim")
+            Me.columnflastlab = MyBase.Columns("flastlab")
+            Me.columnfnsh_date = MyBase.Columns("fnsh_date")
+            Me.columnfpartno = MyBase.Columns("fpartno")
+            Me.columnfsono = MyBase.Columns("fsono")
+            Me.columnfstatus = MyBase.Columns("fstatus")
+            Me.columnfact_rel = MyBase.Columns("fact_rel")
+            Me.columnfcompany = MyBase.Columns("fcompany")
+            Me.columnfddue_date = MyBase.Columns("fddue_date")
+            Me.columnfquantity = MyBase.Columns("fquantity")
+            Me.columnfstrt_date = MyBase.Columns("fstrt_date")
+            Me.columnfnqty_comp = MyBase.Columns("fnqty_comp")
+            Me.columnfnqty_togo = MyBase.Columns("fnqty_togo")
+            Me.columnfsetuptime = MyBase.Columns("fsetuptime")
+            Me.columnfuprodtime = MyBase.Columns("fuprodtime")
+            Me.columnidentity_column = MyBase.Columns("identity_column")
+            Me.columnExpr1 = MyBase.Columns("Expr1")
+            Me.columnExpr2 = MyBase.Columns("Expr2")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnfjobno = New Global.System.Data.DataColumn("fjobno", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfjobno)
+            Me.columnfoperno = New Global.System.Data.DataColumn("foperno", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfoperno)
+            Me.columnfstrtdate = New Global.System.Data.DataColumn("fstrtdate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfstrtdate)
+            Me.columnfopermemo = New Global.System.Data.DataColumn("fopermemo", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfopermemo)
+            Me.columnfpro_id = New Global.System.Data.DataColumn("fpro_id", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfpro_id)
+            Me.columnfprod_tim = New Global.System.Data.DataColumn("fprod_tim", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfprod_tim)
+            Me.columnflastlab = New Global.System.Data.DataColumn("flastlab", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnflastlab)
+            Me.columnfnsh_date = New Global.System.Data.DataColumn("fnsh_date", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfnsh_date)
+            Me.columnfpartno = New Global.System.Data.DataColumn("fpartno", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfpartno)
+            Me.columnfsono = New Global.System.Data.DataColumn("fsono", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfsono)
+            Me.columnfstatus = New Global.System.Data.DataColumn("fstatus", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfstatus)
+            Me.columnfact_rel = New Global.System.Data.DataColumn("fact_rel", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfact_rel)
+            Me.columnfcompany = New Global.System.Data.DataColumn("fcompany", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfcompany)
+            Me.columnfddue_date = New Global.System.Data.DataColumn("fddue_date", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfddue_date)
+            Me.columnfquantity = New Global.System.Data.DataColumn("fquantity", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfquantity)
+            Me.columnfstrt_date = New Global.System.Data.DataColumn("fstrt_date", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfstrt_date)
+            Me.columnfnqty_comp = New Global.System.Data.DataColumn("fnqty_comp", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfnqty_comp)
+            Me.columnfnqty_togo = New Global.System.Data.DataColumn("fnqty_togo", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfnqty_togo)
+            Me.columnfsetuptime = New Global.System.Data.DataColumn("fsetuptime", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfsetuptime)
+            Me.columnfuprodtime = New Global.System.Data.DataColumn("fuprodtime", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfuprodtime)
+            Me.columnidentity_column = New Global.System.Data.DataColumn("identity_column", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnidentity_column)
+            Me.columnExpr1 = New Global.System.Data.DataColumn("Expr1", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnExpr1)
+            Me.columnExpr2 = New Global.System.Data.DataColumn("Expr2", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnExpr2)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnidentity_column, Me.columnExpr1}, true))
+            Me.columnfjobno.AllowDBNull = false
+            Me.columnfjobno.MaxLength = 20
+            Me.columnfoperno.AllowDBNull = false
+            Me.columnfstrtdate.AllowDBNull = false
+            Me.columnfopermemo.AllowDBNull = false
+            Me.columnfopermemo.MaxLength = 2147483647
+            Me.columnfpro_id.AllowDBNull = false
+            Me.columnfpro_id.MaxLength = 7
+            Me.columnfprod_tim.AllowDBNull = false
+            Me.columnflastlab.AllowDBNull = false
+            Me.columnfnsh_date.AllowDBNull = false
+            Me.columnfpartno.AllowDBNull = false
+            Me.columnfpartno.MaxLength = 25
+            Me.columnfsono.AllowDBNull = false
+            Me.columnfsono.MaxLength = 10
+            Me.columnfstatus.AllowDBNull = false
+            Me.columnfstatus.MaxLength = 10
+            Me.columnfact_rel.AllowDBNull = false
+            Me.columnfcompany.AllowDBNull = false
+            Me.columnfcompany.MaxLength = 35
+            Me.columnfddue_date.AllowDBNull = false
+            Me.columnfquantity.AllowDBNull = false
+            Me.columnfstrt_date.AllowDBNull = false
+            Me.columnfnqty_comp.AllowDBNull = false
+            Me.columnfnqty_togo.AllowDBNull = false
+            Me.columnfsetuptime.AllowDBNull = false
+            Me.columnfuprodtime.AllowDBNull = false
+            Me.columnidentity_column.AutoIncrement = true
+            Me.columnidentity_column.AutoIncrementSeed = -1
+            Me.columnidentity_column.AutoIncrementStep = -1
+            Me.columnidentity_column.AllowDBNull = false
+            Me.columnidentity_column.ReadOnly = true
+            Me.columnExpr1.AutoIncrement = true
+            Me.columnExpr1.AutoIncrementSeed = -1
+            Me.columnExpr1.AutoIncrementStep = -1
+            Me.columnExpr1.AllowDBNull = false
+            Me.columnExpr1.ReadOnly = true
+            Me.columnExpr2.AllowDBNull = false
+            Me.columnExpr2.MaxLength = 10
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function NewJodrtgRow() As JodrtgRow
+            Return CType(Me.NewRow,JodrtgRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New JodrtgRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(JodrtgRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.JodrtgRowChangedEvent) Is Nothing) Then
+                RaiseEvent JodrtgRowChanged(Me, New JodrtgRowChangeEvent(CType(e.Row,JodrtgRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.JodrtgRowChangingEvent) Is Nothing) Then
+                RaiseEvent JodrtgRowChanging(Me, New JodrtgRowChangeEvent(CType(e.Row,JodrtgRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.JodrtgRowDeletedEvent) Is Nothing) Then
+                RaiseEvent JodrtgRowDeleted(Me, New JodrtgRowChangeEvent(CType(e.Row,JodrtgRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.JodrtgRowDeletingEvent) Is Nothing) Then
+                RaiseEvent JodrtgRowDeleting(Me, New JodrtgRowChangeEvent(CType(e.Row,JodrtgRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub RemoveJodrtgRow(ByVal row As JodrtgRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As DataSet1 = New DataSet1()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "JodrtgDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
     Partial Public Class MTCMasterRow
@@ -1566,6 +2206,275 @@ Partial Public Class DataSet1
     End Class
     
     '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class JodrtgRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableJodrtg As JodrtgDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableJodrtg = CType(Me.Table,JodrtgDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fjobno() As String
+            Get
+                Return CType(Me(Me.tableJodrtg.fjobnoColumn),String)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fjobnoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property foperno() As Integer
+            Get
+                Return CType(Me(Me.tableJodrtg.fopernoColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fopernoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fstrtdate() As Date
+            Get
+                Return CType(Me(Me.tableJodrtg.fstrtdateColumn),Date)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fstrtdateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fopermemo() As String
+            Get
+                Return CType(Me(Me.tableJodrtg.fopermemoColumn),String)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fopermemoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fpro_id() As String
+            Get
+                Return CType(Me(Me.tableJodrtg.fpro_idColumn),String)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fpro_idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fprod_tim() As Decimal
+            Get
+                Return CType(Me(Me.tableJodrtg.fprod_timColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fprod_timColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property flastlab() As Date
+            Get
+                Return CType(Me(Me.tableJodrtg.flastlabColumn),Date)
+            End Get
+            Set
+                Me(Me.tableJodrtg.flastlabColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fnsh_date() As Date
+            Get
+                Return CType(Me(Me.tableJodrtg.fnsh_dateColumn),Date)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fnsh_dateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fpartno() As String
+            Get
+                Return CType(Me(Me.tableJodrtg.fpartnoColumn),String)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fpartnoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fsono() As String
+            Get
+                Return CType(Me(Me.tableJodrtg.fsonoColumn),String)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fsonoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fstatus() As String
+            Get
+                Return CType(Me(Me.tableJodrtg.fstatusColumn),String)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fstatusColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fact_rel() As Date
+            Get
+                Return CType(Me(Me.tableJodrtg.fact_relColumn),Date)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fact_relColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fcompany() As String
+            Get
+                Return CType(Me(Me.tableJodrtg.fcompanyColumn),String)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fcompanyColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fddue_date() As Date
+            Get
+                Return CType(Me(Me.tableJodrtg.fddue_dateColumn),Date)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fddue_dateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fquantity() As Decimal
+            Get
+                Return CType(Me(Me.tableJodrtg.fquantityColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fquantityColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fstrt_date() As Date
+            Get
+                Return CType(Me(Me.tableJodrtg.fstrt_dateColumn),Date)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fstrt_dateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fnqty_comp() As Decimal
+            Get
+                Return CType(Me(Me.tableJodrtg.fnqty_compColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fnqty_compColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fnqty_togo() As Decimal
+            Get
+                Return CType(Me(Me.tableJodrtg.fnqty_togoColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fnqty_togoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fsetuptime() As Decimal
+            Get
+                Return CType(Me(Me.tableJodrtg.fsetuptimeColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fsetuptimeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fuprodtime() As Decimal
+            Get
+                Return CType(Me(Me.tableJodrtg.fuprodtimeColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableJodrtg.fuprodtimeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property identity_column() As Integer
+            Get
+                Return CType(Me(Me.tableJodrtg.identity_columnColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableJodrtg.identity_columnColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property Expr1() As Integer
+            Get
+                Return CType(Me(Me.tableJodrtg.Expr1Column),Integer)
+            End Get
+            Set
+                Me(Me.tableJodrtg.Expr1Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property Expr2() As String
+            Get
+                Return CType(Me(Me.tableJodrtg.Expr2Column),String)
+            End Get
+            Set
+                Me(Me.tableJodrtg.Expr2Column) = value
+            End Set
+        End Property
+    End Class
+    
+    '''<summary>
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
@@ -1623,6 +2532,42 @@ Partial Public Class DataSet1
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public ReadOnly Property Row() As workcenterlistRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+    Public Class JodrtgRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As JodrtgRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub New(ByVal row As JodrtgRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property Row() As JodrtgRow
             Get
                 Return Me.eventRow
             End Get
@@ -2815,6 +3760,210 @@ Namespace DataSet1TableAdapters
                     ByVal Original_Idle_Time As Integer,  _
                     ByVal Original_Run_Time As Integer) As Integer
             Return Me.Update(Original_ID, WCID, DESCRIPTION, CELL, PING_IP, AGENT_IP, Available, Jobno, Opno, Running, Estop, Count, Idle_Time, Run_Time, Original_ID, Original_WCID, Original_DESCRIPTION, Original_CELL, Original_PING_IP, Original_AGENT_IP, Original_Available, Original_Jobno, Original_Opno, Original_Running, Original_Estop, Original_Count, Original_Idle_Time, Original_Run_Time)
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class JodrtgTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.Odbc.OdbcDataAdapter
+        
+        Private _connection As Global.System.Data.Odbc.OdbcConnection
+        
+        Private _transaction As Global.System.Data.Odbc.OdbcTransaction
+        
+        Private _commandCollection() As Global.System.Data.Odbc.OdbcCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.Odbc.OdbcDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Friend Property Connection() As Global.System.Data.Odbc.OdbcConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.Odbc.OdbcCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Friend Property Transaction() As Global.System.Data.Odbc.OdbcTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.Odbc.OdbcCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.Odbc.OdbcDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "Jodrtg"
+            tableMapping.ColumnMappings.Add("fjobno", "fjobno")
+            tableMapping.ColumnMappings.Add("foperno", "foperno")
+            tableMapping.ColumnMappings.Add("fstrtdate", "fstrtdate")
+            tableMapping.ColumnMappings.Add("fopermemo", "fopermemo")
+            tableMapping.ColumnMappings.Add("fpro_id", "fpro_id")
+            tableMapping.ColumnMappings.Add("fprod_tim", "fprod_tim")
+            tableMapping.ColumnMappings.Add("flastlab", "flastlab")
+            tableMapping.ColumnMappings.Add("fnsh_date", "fnsh_date")
+            tableMapping.ColumnMappings.Add("fpartno", "fpartno")
+            tableMapping.ColumnMappings.Add("fsono", "fsono")
+            tableMapping.ColumnMappings.Add("fstatus", "fstatus")
+            tableMapping.ColumnMappings.Add("fact_rel", "fact_rel")
+            tableMapping.ColumnMappings.Add("fcompany", "fcompany")
+            tableMapping.ColumnMappings.Add("fddue_date", "fddue_date")
+            tableMapping.ColumnMappings.Add("fquantity", "fquantity")
+            tableMapping.ColumnMappings.Add("fstrt_date", "fstrt_date")
+            tableMapping.ColumnMappings.Add("fnqty_comp", "fnqty_comp")
+            tableMapping.ColumnMappings.Add("fnqty_togo", "fnqty_togo")
+            tableMapping.ColumnMappings.Add("fsetuptime", "fsetuptime")
+            tableMapping.ColumnMappings.Add("fuprodtime", "fuprodtime")
+            tableMapping.ColumnMappings.Add("identity_column", "identity_column")
+            tableMapping.ColumnMappings.Add("Expr1", "Expr1")
+            tableMapping.ColumnMappings.Add("Expr2", "Expr2")
+            Me._adapter.TableMappings.Add(tableMapping)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.Odbc.OdbcConnection()
+            Me._connection.ConnectionString = Global.MTCDashboard.My.MySettings.Default.M2MDATA11ConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.Odbc.OdbcCommand(0) {}
+            Me._commandCollection(0) = New Global.System.Data.Odbc.OdbcCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT        jodrtg.fjobno, jodrtg.foperno, jodrtg.fstrtdate, jodrtg.fopermemo, "& _ 
+                "jodrtg.fpro_id, jodrtg.fprod_tim, jodrtg.flastlab, jodrtg.fnsh_date, jomast.fpar"& _ 
+                "tno, jomast.fsono, jomast.fstatus, jomast.fact_rel, jomast.fcompany, jomast.fddu"& _ 
+                "e_date, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         jomast.fquantity, jomast.fstrt_date, jodrtg.f"& _ 
+                "nqty_comp, jodrtg.fnqty_togo, dbo.jodrtg.fsetuptime, dbo.jodrtg.fuprodtime, dbo."& _ 
+                "jomast.identity_column, dbo.jodrtg.identity_column AS Expr1, dbo.jomast.fstatus "& _ 
+                "AS Expr2"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            dbo.jodrtg CROSS JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         dbo.jo"& _ 
+                "mast"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (jodrtg.fjobno = jomast.fjobno) AND (jomast.fstatus = 'RELEAS"& _ 
+                "ED') OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (jodrtg.fjobno = jomast.fjobno) AND (dbo.jomas"& _ 
+                "t.fstatus = 'ON HOLD')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY jodrtg.fjobno, jodrtg.foperno"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As DataSet1.JodrtgDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As DataSet1.JodrtgDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As DataSet1.JodrtgDataTable = New DataSet1.JodrtgDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
         End Function
     End Class
     
