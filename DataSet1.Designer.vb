@@ -740,6 +740,8 @@ Partial Public Class DataSet1
         
         Private columnIdle_Time As Global.System.Data.DataColumn
         
+        Private columnTYPE As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub New()
@@ -888,6 +890,14 @@ Partial Public Class DataSet1
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property TYPEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTYPE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -924,9 +934,9 @@ Partial Public Class DataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddworkcenterlistRow(ByVal ID As Integer, ByVal WCID As String, ByVal DESCRIPTION As String, ByVal CELL As String, ByVal PING_IP As String, ByVal AGENT_IP As String, ByVal Available As Boolean, ByVal Jobno As String, ByVal Opno As String, ByVal Running As Boolean, ByVal Estop As Boolean, ByVal Count As Integer, ByVal Run_Time As Integer, ByVal Idle_Time As Integer) As workcenterlistRow
+        Public Overloads Function AddworkcenterlistRow(ByVal ID As Integer, ByVal WCID As String, ByVal DESCRIPTION As String, ByVal CELL As String, ByVal PING_IP As String, ByVal AGENT_IP As String, ByVal Available As Boolean, ByVal Jobno As String, ByVal Opno As String, ByVal Running As Boolean, ByVal Estop As Boolean, ByVal Count As Integer, ByVal Run_Time As Integer, ByVal Idle_Time As Integer, ByVal TYPE As String) As workcenterlistRow
             Dim rowworkcenterlistRow As workcenterlistRow = CType(Me.NewRow,workcenterlistRow)
-            Dim columnValuesArray() As Object = New Object() {ID, WCID, DESCRIPTION, CELL, PING_IP, AGENT_IP, Available, Jobno, Opno, Running, Estop, Count, Run_Time, Idle_Time}
+            Dim columnValuesArray() As Object = New Object() {ID, WCID, DESCRIPTION, CELL, PING_IP, AGENT_IP, Available, Jobno, Opno, Running, Estop, Count, Run_Time, Idle_Time, TYPE}
             rowworkcenterlistRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowworkcenterlistRow)
             Return rowworkcenterlistRow
@@ -969,6 +979,7 @@ Partial Public Class DataSet1
             Me.columnCount = MyBase.Columns("Count")
             Me.columnRun_Time = MyBase.Columns("Run_Time")
             Me.columnIdle_Time = MyBase.Columns("Idle_Time")
+            Me.columnTYPE = MyBase.Columns("TYPE")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1002,6 +1013,8 @@ Partial Public Class DataSet1
             MyBase.Columns.Add(Me.columnRun_Time)
             Me.columnIdle_Time = New Global.System.Data.DataColumn("Idle_Time", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnIdle_Time)
+            Me.columnTYPE = New Global.System.Data.DataColumn("TYPE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTYPE)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
             Me.columnID.AllowDBNull = false
             Me.columnID.Unique = true
@@ -1021,6 +1034,7 @@ Partial Public Class DataSet1
             Me.columnCount.AllowDBNull = false
             Me.columnRun_Time.AllowDBNull = false
             Me.columnIdle_Time.AllowDBNull = false
+            Me.columnTYPE.MaxLength = 5
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2158,6 +2172,21 @@ Partial Public Class DataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property TYPE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableworkcenterlist.TYPEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TYPE' in table 'workcenterlist' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableworkcenterlist.TYPEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Function IsPING_IPNull() As Boolean
             Return Me.IsNull(Me.tableworkcenterlist.PING_IPColumn)
         End Function
@@ -2202,6 +2231,18 @@ Partial Public Class DataSet1
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub SetOpnoNull()
             Me(Me.tableworkcenterlist.OpnoColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsTYPENull() As Boolean
+            Return Me.IsNull(Me.tableworkcenterlist.TYPEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetTYPENull()
+            Me(Me.tableworkcenterlist.TYPEColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -3291,6 +3332,7 @@ Namespace DataSet1TableAdapters
             tableMapping.ColumnMappings.Add("Count", "Count")
             tableMapping.ColumnMappings.Add("Run_Time", "Run_Time")
             tableMapping.ColumnMappings.Add("Idle_Time", "Idle_Time")
+            tableMapping.ColumnMappings.Add("TYPE", "TYPE")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.Odbc.OdbcCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -3299,7 +3341,8 @@ Namespace DataSet1TableAdapters
                 "ND ((? = 1 AND [AGENT_IP] IS NULL) OR ([AGENT_IP] = ?)) AND ([Available] = ?) AN"& _ 
                 "D ((? = 1 AND [Jobno] IS NULL) OR ([Jobno] = ?)) AND ((? = 1 AND [Opno] IS NULL)"& _ 
                 " OR ([Opno] = ?)) AND ([Running] = ?) AND ([Estop] = ?) AND ([Count] = ?) AND (["& _ 
-                "Idle_Time] = ?) AND ([Run_Time] = ?))"
+                "Idle_Time] = ?) AND ([Run_Time] = ?) AND ((? = 1 AND [TYPE] IS NULL) OR ([TYPE] "& _ 
+                "= ?)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_ID", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_WCID", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "WCID", Global.System.Data.DataRowVersion.Original, false, Nothing))
@@ -3319,11 +3362,13 @@ Namespace DataSet1TableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_Count", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Count", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_Idle_Time", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Idle_Time", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_Run_Time", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Run_Time", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("IsNull_TYPE", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TYPE", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_TYPE", Global.System.Data.Odbc.OdbcType.NChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TYPE", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.InsertCommand = New Global.System.Data.Odbc.OdbcCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [workcenterlist] ([ID], [WCID], [DESCRIPTION], [CELL], [PING_IP], [AG"& _ 
                 "ENT_IP], [Available], [Jobno], [Opno], [Running], [Estop], [Count], [Idle_Time],"& _ 
-                " [Run_Time]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                " [Run_Time], [TYPE]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ID", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("WCID", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "WCID", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -3339,16 +3384,18 @@ Namespace DataSet1TableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Count", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Count", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Idle_Time", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Idle_Time", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Run_Time", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Run_Time", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TYPE", Global.System.Data.Odbc.OdbcType.NChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TYPE", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand = New Global.System.Data.Odbc.OdbcCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [workcenterlist] SET [ID] = ?, [WCID] = ?, [DESCRIPTION] = ?, [CELL] = ?, "& _ 
                 "[PING_IP] = ?, [AGENT_IP] = ?, [Available] = ?, [Jobno] = ?, [Opno] = ?, [Runnin"& _ 
-                "g] = ?, [Estop] = ?, [Count] = ?, [Idle_Time] = ?, [Run_Time] = ? WHERE (([ID] ="& _ 
-                " ?) AND ([WCID] = ?) AND ([DESCRIPTION] = ?) AND ([CELL] = ?) AND ((? = 1 AND [P"& _ 
-                "ING_IP] IS NULL) OR ([PING_IP] = ?)) AND ((? = 1 AND [AGENT_IP] IS NULL) OR ([AG"& _ 
-                "ENT_IP] = ?)) AND ([Available] = ?) AND ((? = 1 AND [Jobno] IS NULL) OR ([Jobno]"& _ 
-                " = ?)) AND ((? = 1 AND [Opno] IS NULL) OR ([Opno] = ?)) AND ([Running] = ?) AND "& _ 
-                "([Estop] = ?) AND ([Count] = ?) AND ([Idle_Time] = ?) AND ([Run_Time] = ?))"
+                "g] = ?, [Estop] = ?, [Count] = ?, [Idle_Time] = ?, [Run_Time] = ?, [TYPE] = ? WH"& _ 
+                "ERE (([ID] = ?) AND ([WCID] = ?) AND ([DESCRIPTION] = ?) AND ([CELL] = ?) AND (("& _ 
+                "? = 1 AND [PING_IP] IS NULL) OR ([PING_IP] = ?)) AND ((? = 1 AND [AGENT_IP] IS N"& _ 
+                "ULL) OR ([AGENT_IP] = ?)) AND ([Available] = ?) AND ((? = 1 AND [Jobno] IS NULL)"& _ 
+                " OR ([Jobno] = ?)) AND ((? = 1 AND [Opno] IS NULL) OR ([Opno] = ?)) AND ([Runnin"& _ 
+                "g] = ?) AND ([Estop] = ?) AND ([Count] = ?) AND ([Idle_Time] = ?) AND ([Run_Time"& _ 
+                "] = ?) AND ((? = 1 AND [TYPE] IS NULL) OR ([TYPE] = ?)))"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ID", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("WCID", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "WCID", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -3364,6 +3411,7 @@ Namespace DataSet1TableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Count", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Count", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Idle_Time", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Idle_Time", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Run_Time", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Run_Time", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TYPE", Global.System.Data.Odbc.OdbcType.NChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TYPE", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_ID", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_WCID", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "WCID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_DESCRIPTION", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DESCRIPTION", Global.System.Data.DataRowVersion.Original, false, Nothing))
@@ -3382,6 +3430,8 @@ Namespace DataSet1TableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_Count", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Count", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_Idle_Time", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Idle_Time", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_Run_Time", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Run_Time", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("IsNull_TYPE", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TYPE", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Original_TYPE", Global.System.Data.Odbc.OdbcType.NChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TYPE", Global.System.Data.DataRowVersion.Original, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3398,8 +3448,8 @@ Namespace DataSet1TableAdapters
             Me._commandCollection(0) = New Global.System.Data.Odbc.OdbcCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        ID, WCID, DESCRIPTION, CELL, PING_IP, AGENT_IP, Available, Jobno, O"& _ 
-                "pno, Running, Estop, [Count], Idle_Time, Run_Time"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            workcenterlis"& _ 
-                "t"
+                "pno, Running, Estop, [Count], Idle_Time, Run_Time, TYPE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            workcen"& _ 
+                "terlist"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -3459,7 +3509,7 @@ Namespace DataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_WCID As String, ByVal Original_DESCRIPTION As String, ByVal Original_CELL As String, ByVal Original_PING_IP As String, ByVal Original_AGENT_IP As String, ByVal Original_Available As Boolean, ByVal Original_Jobno As String, ByVal Original_Opno As String, ByVal Original_Running As Boolean, ByVal Original_Estop As Boolean, ByVal Original_Count As Integer, ByVal Original_Idle_Time As Integer, ByVal Original_Run_Time As Integer) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_WCID As String, ByVal Original_DESCRIPTION As String, ByVal Original_CELL As String, ByVal Original_PING_IP As String, ByVal Original_AGENT_IP As String, ByVal Original_Available As Boolean, ByVal Original_Jobno As String, ByVal Original_Opno As String, ByVal Original_Running As Boolean, ByVal Original_Estop As Boolean, ByVal Original_Count As Integer, ByVal Original_Idle_Time As Integer, ByVal Original_Run_Time As Integer, ByVal Original_TYPE As String) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_ID,Integer)
             If (Original_WCID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_WCID")
@@ -3510,6 +3560,13 @@ Namespace DataSet1TableAdapters
             Me.Adapter.DeleteCommand.Parameters(15).Value = CType(Original_Count,Integer)
             Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_Idle_Time,Integer)
             Me.Adapter.DeleteCommand.Parameters(17).Value = CType(Original_Run_Time,Integer)
+            If (Original_TYPE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(19).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(Original_TYPE,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -3529,7 +3586,7 @@ Namespace DataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal ID As Integer, ByVal WCID As String, ByVal DESCRIPTION As String, ByVal CELL As String, ByVal PING_IP As String, ByVal AGENT_IP As String, ByVal Available As Boolean, ByVal Jobno As String, ByVal Opno As String, ByVal Running As Boolean, ByVal Estop As Boolean, ByVal Count As Integer, ByVal Idle_Time As Integer, ByVal Run_Time As Integer) As Integer
+        Public Overloads Overridable Function Insert(ByVal ID As Integer, ByVal WCID As String, ByVal DESCRIPTION As String, ByVal CELL As String, ByVal PING_IP As String, ByVal AGENT_IP As String, ByVal Available As Boolean, ByVal Jobno As String, ByVal Opno As String, ByVal Running As Boolean, ByVal Estop As Boolean, ByVal Count As Integer, ByVal Idle_Time As Integer, ByVal Run_Time As Integer, ByVal TYPE As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(ID,Integer)
             If (WCID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("WCID")
@@ -3572,6 +3629,11 @@ Namespace DataSet1TableAdapters
             Me.Adapter.InsertCommand.Parameters(11).Value = CType(Count,Integer)
             Me.Adapter.InsertCommand.Parameters(12).Value = CType(Idle_Time,Integer)
             Me.Adapter.InsertCommand.Parameters(13).Value = CType(Run_Time,Integer)
+            If (TYPE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(TYPE,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -3606,6 +3668,7 @@ Namespace DataSet1TableAdapters
                     ByVal Count As Integer,  _
                     ByVal Idle_Time As Integer,  _
                     ByVal Run_Time As Integer,  _
+                    ByVal TYPE As String,  _
                     ByVal Original_ID As Integer,  _
                     ByVal Original_WCID As String,  _
                     ByVal Original_DESCRIPTION As String,  _
@@ -3619,7 +3682,8 @@ Namespace DataSet1TableAdapters
                     ByVal Original_Estop As Boolean,  _
                     ByVal Original_Count As Integer,  _
                     ByVal Original_Idle_Time As Integer,  _
-                    ByVal Original_Run_Time As Integer) As Integer
+                    ByVal Original_Run_Time As Integer,  _
+                    ByVal Original_TYPE As String) As Integer
             Me.Adapter.UpdateCommand.Parameters(0).Value = CType(ID,Integer)
             If (WCID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("WCID")
@@ -3662,56 +3726,68 @@ Namespace DataSet1TableAdapters
             Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Count,Integer)
             Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Idle_Time,Integer)
             Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Run_Time,Integer)
-            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_ID,Integer)
+            If (TYPE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(TYPE,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_ID,Integer)
             If (Original_WCID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_WCID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_WCID,String)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_WCID,String)
             End If
             If (Original_DESCRIPTION Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_DESCRIPTION")
             Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_DESCRIPTION,String)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_DESCRIPTION,String)
             End If
             If (Original_CELL Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_CELL")
             Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_CELL,String)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_CELL,String)
             End If
             If (Original_PING_IP Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_PING_IP,String)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_PING_IP,String)
             End If
             If (Original_AGENT_IP Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_AGENT_IP,String)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_AGENT_IP,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_Available,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_Available,Boolean)
             If (Original_Jobno Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_Jobno,String)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_Jobno,String)
             End If
             If (Original_Opno Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(26).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Original_Opno,String)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_Opno,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_Running,Boolean)
-            Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_Estop,Boolean)
-            Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_Count,Integer)
-            Me.Adapter.UpdateCommand.Parameters(30).Value = CType(Original_Idle_Time,Integer)
-            Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_Run_Time,Integer)
+            Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_Running,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_Estop,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(30).Value = CType(Original_Count,Integer)
+            Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_Idle_Time,Integer)
+            Me.Adapter.UpdateCommand.Parameters(32).Value = CType(Original_Run_Time,Integer)
+            If (Original_TYPE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(34).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(Original_TYPE,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -3745,6 +3821,7 @@ Namespace DataSet1TableAdapters
                     ByVal Count As Integer,  _
                     ByVal Idle_Time As Integer,  _
                     ByVal Run_Time As Integer,  _
+                    ByVal TYPE As String,  _
                     ByVal Original_ID As Integer,  _
                     ByVal Original_WCID As String,  _
                     ByVal Original_DESCRIPTION As String,  _
@@ -3758,8 +3835,9 @@ Namespace DataSet1TableAdapters
                     ByVal Original_Estop As Boolean,  _
                     ByVal Original_Count As Integer,  _
                     ByVal Original_Idle_Time As Integer,  _
-                    ByVal Original_Run_Time As Integer) As Integer
-            Return Me.Update(Original_ID, WCID, DESCRIPTION, CELL, PING_IP, AGENT_IP, Available, Jobno, Opno, Running, Estop, Count, Idle_Time, Run_Time, Original_ID, Original_WCID, Original_DESCRIPTION, Original_CELL, Original_PING_IP, Original_AGENT_IP, Original_Available, Original_Jobno, Original_Opno, Original_Running, Original_Estop, Original_Count, Original_Idle_Time, Original_Run_Time)
+                    ByVal Original_Run_Time As Integer,  _
+                    ByVal Original_TYPE As String) As Integer
+            Return Me.Update(Original_ID, WCID, DESCRIPTION, CELL, PING_IP, AGENT_IP, Available, Jobno, Opno, Running, Estop, Count, Idle_Time, Run_Time, TYPE, Original_ID, Original_WCID, Original_DESCRIPTION, Original_CELL, Original_PING_IP, Original_AGENT_IP, Original_Available, Original_Jobno, Original_Opno, Original_Running, Original_Estop, Original_Count, Original_Idle_Time, Original_Run_Time, Original_TYPE)
         End Function
     End Class
     

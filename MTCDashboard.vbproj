@@ -128,6 +128,18 @@
     <Compile Include="FrmJobView.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Frm_M3.Designer.vb">
+      <DependentUpon>Frm_M3.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_M3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_T2.Designer.vb">
+      <DependentUpon>Frm_T2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_T2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Frm_Unit_Monitor.Designer.vb">
       <DependentUpon>Frm_Unit_Monitor.vb</DependentUpon>
     </Compile>
@@ -159,6 +171,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmJobView.resx">
       <DependentUpon>FrmJobView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_M3.resx">
+      <DependentUpon>Frm_M3.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_T2.resx">
+      <DependentUpon>Frm_T2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Unit_Monitor.resx">
       <DependentUpon>Frm_Unit_Monitor.vb</DependentUpon>

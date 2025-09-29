@@ -45,6 +45,7 @@ Partial Class Form2
         Me.WorkcenterlistTableAdapter = New MTCDashboard.DataSet1TableAdapters.workcenterlistTableAdapter()
         Me.DataSet1 = New MTCDashboard.DataSet1()
         Me.MtcMasterTableAdapter = New MTCDashboard.DataSet1TableAdapters.MTCMasterTableAdapter()
+        Me.Button3 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -220,6 +221,15 @@ Partial Class Form2
         '
         Me.MtcMasterTableAdapter.ClearBeforeFill = True
         '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(1272, 68)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(65, 23)
+        Me.Button3.TabIndex = 4
+        Me.Button3.Text = "Date"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -242,6 +252,7 @@ Partial Class Form2
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.FlowLayoutPanel1)
+        Me.Controls.Add(Me.Button3)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form2"
@@ -274,4 +285,5 @@ Partial Class Form2
     Friend WithEvents Label11 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
+    Friend WithEvents Button3 As Button
 End Class

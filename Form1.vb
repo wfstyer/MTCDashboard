@@ -83,7 +83,24 @@
         machdatasource = "http://" + agentaddress + "/current"
 
         If My.Computer.Network.Ping(netaddress) Then
-            Frm_Unit_Monitor.Show()
+            Select Case Trim(foundrow(0)("TYPE"))
+                Case "T2"
+                    Frm_T2.Show()
+                Case "TM"
+
+                Case "TMY"
+
+                Case "TMS"
+
+                Case "TMSY"
+                    Frm_Unit_Monitor.Show()
+                Case "M3"
+                    Frm_M3.Show()
+                Case "M4"
+
+                Case Else
+
+            End Select
             'MsgBox("Server pinged successfully.")
         Else
             MsgBox("Machine Not Avilable.")
