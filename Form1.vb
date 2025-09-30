@@ -85,18 +85,73 @@
         If My.Computer.Network.Ping(netaddress) Then
             Select Case Trim(foundrow(0)("TYPE"))
                 Case "T2"
-                    Frm_T2.Show()
+                    Select Case Trim(foundrow(0)("Control"))
+                        Case "MATRIX"
+
+                        Case "640"
+                            Frm_T2.Show()
+                        Case Else
+
+                    End Select
                 Case "TM"
+                    Select Case Trim(foundrow(0)("Control"))
+                        Case "MATRIX"
+                            Frm_TMX.Show()
+                        Case "SMART"
+
+                        Case Else
+
+                    End Select
 
                 Case "TMY"
+                    Select Case Trim(foundrow(0)("Control"))
+                        Case "MATRIX"
+
+                        Case "SMOOTH"
+
+                        Case Else
+
+                    End Select
 
                 Case "TMS"
+                    Select Case Trim(foundrow(0)("Control"))
+                        Case "MATRIX"
+
+                        Case "640"
+
+                        Case Else
+
+                    End Select
 
                 Case "TMSY"
-                    Frm_Unit_Monitor.Show()
+                    Select Case Trim(foundrow(0)("Control"))
+                        Case "MATRIX"
+
+                        Case "SMOOTH"
+                            Frm_Unit_Monitor.Show()
+                        Case Else
+
+                    End Select
                 Case "M3"
-                    Frm_M3.Show()
+                    Select Case Trim(foundrow(0)("Control"))
+                        Case "MATRIXM"
+                            Frm_M3.Show()
+                        Case "SMOOTHM"
+
+                        Case Else
+
+                    End Select
+
                 Case "M4"
+                    Select Case Trim(foundrow(0)("Control"))
+                        Case "MATRIXM"
+
+                        Case "SMOOTHM"
+
+                        Case Else
+
+                    End Select
+
 
                 Case Else
 
