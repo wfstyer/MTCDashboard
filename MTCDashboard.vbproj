@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -152,6 +152,12 @@
     <Compile Include="Frm_TMX.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Frm_TMY.Designer.vb">
+      <DependentUpon>Frm_TMY.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_TMY.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Frm_Unit_Monitor.Designer.vb">
       <DependentUpon>Frm_Unit_Monitor.vb</DependentUpon>
     </Compile>
@@ -195,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_TMX.resx">
       <DependentUpon>Frm_TMX.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_TMY.resx">
+      <DependentUpon>Frm_TMY.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Unit_Monitor.resx">
       <DependentUpon>Frm_Unit_Monitor.vb</DependentUpon>

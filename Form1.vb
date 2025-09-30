@@ -108,7 +108,7 @@
                         Case "MATRIX"
 
                         Case "SMOOTH"
-
+                            Frm_TMY.Show()
                         Case Else
 
                     End Select
