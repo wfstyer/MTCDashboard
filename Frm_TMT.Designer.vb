@@ -23,6 +23,7 @@ Partial Class Frm_TMT
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Frm_TMT))
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.DataSet18 = New System.Data.DataSet()
         Me.TextBox13 = New System.Windows.Forms.TextBox()
@@ -57,6 +58,9 @@ Partial Class Frm_TMT
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         CType(Me.DataSet18, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'Timer1
+        '
         '
         'DataSet18
         '
@@ -355,6 +359,7 @@ Partial Class Frm_TMT
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TextBox1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Frm_TMT"
         Me.Text = "Frm_TMT"
         CType(Me.DataSet18, System.ComponentModel.ISupportInitialize).EndInit()

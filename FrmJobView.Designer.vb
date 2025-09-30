@@ -323,6 +323,7 @@ Partial Class FrmJobView
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TextBox1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmJobView"
         Me.Text = "FrmJobView"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

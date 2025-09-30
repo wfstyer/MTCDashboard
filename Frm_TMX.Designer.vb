@@ -23,6 +23,7 @@ Partial Class Frm_TMX
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Frm_TMX))
         Me.TextBox13 = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -316,6 +317,9 @@ Partial Class Frm_TMX
         Me.TextBox1.TabIndex = 65
         Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'Timer1
+        '
+        '
         'DataSet17
         '
         Me.DataSet17.DataSetName = "NewDataSet"
@@ -355,6 +359,7 @@ Partial Class Frm_TMX
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TextBox1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Frm_TMX"
         Me.Text = "Frm_TMX"
         CType(Me.DataSet17, System.ComponentModel.ISupportInitialize).EndInit()
