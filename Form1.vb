@@ -98,7 +98,7 @@
                         Case "MATRIX"
                             Frm_TMX.Show()
                         Case "SMART"
-
+                            Frm_TMT.Show()
                         Case Else
 
                     End Select

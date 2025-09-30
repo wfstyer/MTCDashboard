@@ -140,6 +140,12 @@
     <Compile Include="Frm_T2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Frm_TMT.Designer.vb">
+      <DependentUpon>Frm_TMT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_TMT.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Frm_TMX.Designer.vb">
       <DependentUpon>Frm_TMX.vb</DependentUpon>
     </Compile>
@@ -183,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_T2.resx">
       <DependentUpon>Frm_T2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_TMT.resx">
+      <DependentUpon>Frm_TMT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_TMX.resx">
       <DependentUpon>Frm_TMX.vb</DependentUpon>
