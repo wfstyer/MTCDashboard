@@ -89,16 +89,19 @@
                         Case "MATRIX"
 
                         Case "640"
-                            Frm_T2.Show()
+                            Dim instanceofFrm_T2 As New Frm_T2
+                            instanceofFrm_T2.Show()
                         Case Else
 
                     End Select
                 Case "TM"
                     Select Case Trim(foundrow(0)("Control"))
                         Case "MATRIX"
-                            Frm_TMX.Show()
+                            Dim instanceofFrm_TMX As New Frm_TMX
+                            instanceofFrm_TMX.Show()
                         Case "SMART"
-                            Frm_TMT.Show()
+                            Dim instanceofFrm_TMT As New Frm_TMT
+                            instanceofFrm_TMT.Show()
                         Case Else
 
                     End Select
@@ -108,7 +111,8 @@
                         Case "MATRIX"
 
                         Case "SMOOTH"
-                            Frm_TMY.Show()
+                            Dim instanceofFrm_TMY As New Frm_TMY
+                            instanceofFrm_TMY.Show()
                         Case Else
 
                     End Select
@@ -128,14 +132,16 @@
                         Case "MATRIX"
 
                         Case "SMOOTH"
-                            Frm_Unit_Monitor.Show()
+                            Dim instanceofFrm_Unit_Monitor As New Frm_Unit_Monitor
+                            instanceofFrm_Unit_Monitor.Show()
                         Case Else
 
                     End Select
                 Case "M3"
                     Select Case Trim(foundrow(0)("Control"))
                         Case "MATRIXM"
-                            Frm_M3.Show()
+                            Dim instanceofFrm_M3 As New Frm_M3
+                            instanceofFrm_M3.Show()
                         Case "SMOOTHM"
 
                         Case Else
