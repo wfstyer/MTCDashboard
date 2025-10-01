@@ -109,7 +109,8 @@
                 Case "TMY"
                     Select Case Trim(foundrow(0)("Control"))
                         Case "MATRIX"
-
+                            Dim instanceofFrm_TMYX As New Frm_TMYX
+                            instanceofFrm_TMYX.Show()
                         Case "SMOOTH"
                             Dim instanceofFrm_TMY As New Frm_TMY
                             instanceofFrm_TMY.Show()
@@ -153,7 +154,8 @@
                         Case "MATRIXM"
 
                         Case "SMOOTHM"
-
+                            Dim instanceofFrm_M4 As New Frm_M4
+                            instanceofFrm_M4.Show()
                         Case Else
 
                     End Select

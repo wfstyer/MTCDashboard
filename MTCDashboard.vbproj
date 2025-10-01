@@ -134,6 +134,12 @@
     <Compile Include="Frm_M3.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Frm_M4.Designer.vb">
+      <DependentUpon>Frm_M4.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_M4.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Frm_T2.Designer.vb">
       <DependentUpon>Frm_T2.vb</DependentUpon>
     </Compile>
@@ -156,6 +162,12 @@
       <DependentUpon>Frm_TMY.vb</DependentUpon>
     </Compile>
     <Compile Include="Frm_TMY.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_TMYX.Designer.vb">
+      <DependentUpon>Frm_TMYX.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_TMYX.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Frm_Unit_Monitor.Designer.vb">
@@ -193,6 +205,9 @@
     <EmbeddedResource Include="Frm_M3.resx">
       <DependentUpon>Frm_M3.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Frm_M4.resx">
+      <DependentUpon>Frm_M4.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Frm_T2.resx">
       <DependentUpon>Frm_T2.vb</DependentUpon>
     </EmbeddedResource>
@@ -204,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_TMY.resx">
       <DependentUpon>Frm_TMY.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_TMYX.resx">
+      <DependentUpon>Frm_TMYX.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Unit_Monitor.resx">
       <DependentUpon>Frm_Unit_Monitor.vb</DependentUpon>
