@@ -45,11 +45,11 @@
         DataSet17.ReadXml(machinecall)
         'DataGridView1.DataSource = DataSet17
 
-        TextBox1.Text = DataSet17.Tables("RotaryVelocity").Rows(0).Item(5)
-        TextBox12.Text = DataSet17.Tables("RotaryVelocity").Rows(1).Item(5)
-        yPos = 419 - Int(DataSet17.Tables("RotaryVelocity").Rows(0).Item(5) / 13)
+        TextBox1.Text = DataSet17.Tables("RotaryVelocity").Rows(1).Item(5)
+        TextBox12.Text = DataSet17.Tables("RotaryVelocity").Rows(0).Item(5)
+        yPos = 419 - Int(DataSet17.Tables("RotaryVelocity").Rows(1).Item(5) / 13)
         Try
-            S2rpm = 419 - Int(DataSet17.Tables("RotaryVelocity").Rows(1).Item(5) / 13)
+            S2rpm = 419 - Int(DataSet17.Tables("RotaryVelocity").Rows(0).Item(5) / 13)
         Catch
             S2rpm = 419
             TextBox12.Text = "0"
