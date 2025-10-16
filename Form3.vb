@@ -1,8 +1,9 @@
-﻿Public Class Form2
+﻿Public Class Form3
+
 
     Public shifttime As Date = TimeValue(" 5:59 AM")
-    Public shiftstart As New DateTime(Today.Year, Today.Month, Today.Day, shifttime.Hour, shifttime.Minute, shifttime.Second)
-    Public showdate As Date = DateValue("1999-01-01")
+    Public showdated As Date = DateValue("1999-01-01")
+    Public showdate2 As Date = DateValue("1999-01-01")
 
     Public machchoice(99) As Boolean
 
@@ -53,6 +54,7 @@
 
     Private Sub GroupBox_Paint(sender As Object, e As PaintEventArgs)
 
+
         Dim rulepen As New Pen(Brushes.Violet, 1)
         For x% = 15 To 1215 Step 100
             e.Graphics.DrawLine(rulepen, x%, 0, x%, 45)
@@ -79,9 +81,13 @@
 
     End Sub
 
-    Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Form3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        MonthCalendar1.Visible = True
+        'showdated = Form2.showdate
+
         Me.WorkcenterlistTableAdapter.ClearBeforeFill = True
         Me.WorkcenterlistTableAdapter.Fill(Me.DataSet1.workcenterlist)
+        showdate2 = showdated.AddDays(1)
 
         For i = 0 To 99
             machchoice(i) = False
@@ -143,20 +149,20 @@
 
                 AddHandler machinebox(boxcount).Paint, AddressOf GroupBox_Paint
 
+
                 boxcount += 1
             End If
             intCursor += 1
         Loop
         boxtally = boxcount - 1
-        Timer1.Enabled = True
 
     End Sub
 
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Me.WorkcenterlistTableAdapter.Fill(Me.DataSet1.workcenterlist)
+    Private Sub ApplyDate()
         Me.MtcMasterTableAdapter.ClearBeforeFill = True
-        Me.MtcMasterTableAdapter.FillByToday(Me.DataSet1.MTCMaster)         ' - get today's master data
+        Me.MtcMasterTableAdapter.FillBy(Me.DataSet1.MTCMaster, showdated, showdate2)         ' - get today's master data
         CurrentDate.Clear()                                                 ' - clear memory datatable
+        Dim shiftstart As New DateTime(showdated.Year, showdated.Month, showdated.Day, shifttime.Hour, shifttime.Minute, shifttime.Second)
 
         For i% = 0 To DataSet1.MTCMaster.Rows.Count - 1
             Dim workrow As DataRow = CurrentDate.NewRow                     ' - working datatable
@@ -176,61 +182,67 @@
             Dim tallytime As TimeSpan
             segmentend(segmentcount) = 0                                    ' - line segment endpoint - starts at zero
             segmentcolor(segmentcount) = 1                                  ' - default line segment color is red
-            Dim colormem As Short                                       ' - set line segment color red
+            Dim colormem As Short = 1                                       ' - set line segment color red
             Dim countstart As Integer = 0
             Dim searchvalue = Trim(chosenmachines(z))                       ' - go thru all displayed machines
-            If CurrentDate.Rows(0)(MarkTime) > shiftstart Then              ' - if first record time > shift start 
-                segmentcolor(segmentcount) = 4                              ' - make segment color gray 
-                segmentcount = 2                                            ' - increment line segment count
-                changetime = CurrentDate.Rows(0)(MarkTime)                  ' - timestamp for status change
-                tallytime = changetime - lastime                            ' - calculate time since last status change
-                segmentend(segmentcount) = tallytime.TotalHours * 100       ' - calculate line segment end
-                lastime = changetime                                        ' - set last status change time memory
-                countstart = 1
-            End If
-            Dim currentrow As DataRow() = DataSet1.workcenterlist.Select("WCID = '" + searchvalue + "'")
-            If currentrow(0)("Available") = True Then
-                colormem = 2                                                ' - set segment color yellow
-                machineOn = True
-            Else
-                colormem = 1                                                ' - set segment color red
-                machineOn = False
-            End If
-            For i% = countstart To CurrentDate.Rows.Count - 1
-                If CurrentDate.Rows(i%)(WorkCID) = searchvalue Then
-                    If CurrentDate.Rows(i%)(StatusChange) Then              ' - read running or not
-                        onflag = True                                       ' - set flag running
-                    Else
-                        onflag = False                                      ' - set flag not running
-                    End If
-                    changetime = CurrentDate.Rows(i%)(MarkTime)             ' - timestamp for status change
-                    If changetime < shiftstart Then                         ' - if timestamp before shiftstart - ignore it
-                        ' nothing
-                    Else
-                        If onflag Xor onmem Then                            ' - if running status changed then
-                            onmem = onflag                                  ' - set last running status
-                            If onmem Then                                   ' - if last segment running then new color is yellow - not running, green
-                                segmentcolor(segmentcount) = 2              ' - set segment color yellow
-                                colormem = 3
-                            Else
-                                segmentcolor(segmentcount) = 3              ' - set segment color green
-                                colormem = 2
-                            End If
-                            tallytime = changetime - lastime                ' - calculate time since last status change
-                            segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100    ' - calculate line segment end
-                            lastime = changetime                            ' - set last status change time memory
-                            segmentcount += 1                               ' - increment line segment count
-                            'segmentcolor(segmentcount) = 1
+            Try
+                If CurrentDate.Rows(0)(MarkTime) > shiftstart Then              ' - if first record time > shift start 
+                    segmentcolor(segmentcount) = 4                              ' - make segment color gray 
+                    segmentcount = 2                                            ' - increment line segment count
+                    changetime = CurrentDate.Rows(0)(MarkTime)                  ' - timestamp for status change
+                    tallytime = changetime - lastime                            ' - calculate time since last status change
+                    segmentend(segmentcount) = tallytime.TotalHours * 100       ' - calculate line segment end
+                    lastime = changetime                                        ' - set last status change time memory
+                    countstart = 1
+                    colormem = 1
+                End If
+                Dim currentrow As DataRow() = DataSet1.workcenterlist.Select("WCID = '" + searchvalue + "'")
+                If currentrow(0)("Available") = True Then
+                    colormem = 2                                                ' - set segment color yellow
+                    machineOn = True
+                Else
+                    colormem = 1                                                ' - set segment color red
+                    machineOn = False
+                End If
+                For i% = countstart To CurrentDate.Rows.Count - 1
+                    'colormem = 1
+                    If CurrentDate.Rows(i%)(WorkCID) = searchvalue Then
+                        If CurrentDate.Rows(i%)(StatusChange) Then              ' - read running or not
+                            onflag = True                                       ' - set flag running
                         Else
+                            onflag = False                                      ' - set flag not running
+                        End If
+                        changetime = CurrentDate.Rows(i%)(MarkTime)             ' - timestamp for status change
+                        If changetime < shiftstart Then                         ' - if timestamp before shiftstart - ignore it
                             ' nothing
+                        Else
+                            If onflag Xor onmem Then                            ' - if running status changed then
+                                onmem = onflag                                  ' - set last running status
+                                If onmem Then                                   ' - if last segment running then new color is yellow - not running, green
+                                    segmentcolor(segmentcount) = 2              ' - set segment color yellow
+                                    colormem = 3
+                                Else
+                                    segmentcolor(segmentcount) = 3              ' - set segment color green
+                                    colormem = 2
+                                End If
+                                tallytime = changetime - lastime                ' - calculate time since last status change
+                                segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100    ' - calculate line segment end
+                                lastime = changetime                            ' - set last status change time memory
+                                segmentcount += 1                               ' - increment line segment count
+                                'segmentcolor(segmentcount) = 1
+                            Else
+                                ' nothing
+                            End If
                         End If
                     End If
-                End If
-            Next
+                Next
+            Catch
+            End Try
             If Not machineOn Then
                 colormem = 1                                                ' - set segment color red
             End If
-            Dim Interval As TimeSpan = Now - shiftstart
+            Dim Interval As TimeSpan = shiftstart.AddHours(12) - shiftstart
+
             segmentend(segmentcount) = Interval.TotalHours * 100
             segmentcolor(segmentcount) = colormem
             machinebox(z).Refresh()
@@ -245,14 +257,22 @@
         Form1.Show()
         Form1.Timer1.Enabled = True
         Me.Close()
-
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Timer1.Enabled = False
-        Form3.Show()
-        Me.Close()
+        MonthCalendar1.Visible = True
+    End Sub
 
+    Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateSelected
+        showdated = e.Start.ToShortDateString
+        If showdated >= Today Then
+            MsgBox("Pick a Date Before Today")
+            Exit Sub
+        End If
+        TextBox1.Text = showdated
+        showdate2 = showdated.AddDays(1)
+        MonthCalendar1.Visible = False
+        ApplyDate()
     End Sub
 
 End Class

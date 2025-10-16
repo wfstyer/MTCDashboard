@@ -42,7 +42,7 @@
         'DataGridView1.DataSource = DataSet21
 
         TextBox1.Text = DataSet21.Tables("RotaryVelocity").Rows(0).Item(4)
-        yPos = 419 - Int(DataSet21.Tables("RotaryVelocity").Rows(0).Item(4) / 13)
+        yPos = 419 - Int(DataSet21.Tables("RotaryVelocity").Rows(0).Item(4) / 26)
         TextBox2.Text = DataSet21.Tables("PartCount").Rows(0).Item(3)
 
         Dim opnofound As Integer = InStr(Trim(DataSet21.Tables("ProgramComment").Rows(1).Item(4)), ":", CompareMethod.Text) + 1

@@ -2901,7 +2901,7 @@ Namespace DataSet1TableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.Odbc.OdbcCommand(1) {}
+            Me._commandCollection = New Global.System.Data.Odbc.OdbcCommand(2) {}
             Me._commandCollection(0) = New Global.System.Data.Odbc.OdbcCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT ID, WCID, Operator, Jobnum, Opnum, Nowtime, Running, Partcount FROM dbo.MT"& _ 
@@ -2910,9 +2910,16 @@ Namespace DataSet1TableAdapters
             Me._commandCollection(1) = New Global.System.Data.Odbc.OdbcCommand()
             Me._commandCollection(1).Connection = Me.Connection
             Me._commandCollection(1).CommandText = "SELECT        ID, WCID, Operator, Jobnum, Opnum, Nowtime, Running, Partcount"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FRO"& _ 
+                "M            MTCMaster"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Nowtime > ?) AND (Nowtime < ?)"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Nowtime", Global.System.Data.Odbc.OdbcType.DateTime, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Nowtime", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Nowtime1", Global.System.Data.Odbc.OdbcType.DateTime, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Nowtime", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(2) = New Global.System.Data.Odbc.OdbcCommand()
+            Me._commandCollection(2).Connection = Me.Connection
+            Me._commandCollection(2).CommandText = "SELECT        ID, WCID, Operator, Jobnum, Opnum, Nowtime, Running, Partcount"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FRO"& _ 
                 "M            dbo.MTCMaster"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        CONVERT(DATE, Nowtime) = CONVERT(DATE, "& _ 
                 "SYSDATETIME())"
-            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2943,8 +2950,52 @@ Namespace DataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
-        Public Overloads Overridable Function FillByToday(ByVal dataTable As DataSet1.MTCMasterDataTable) As Integer
+        Public Overloads Overridable Function FillBy(ByVal dataTable As DataSet1.MTCMasterDataTable, ByVal Nowtime As Global.System.Nullable(Of Date), ByVal Nowtime1 As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            If (Nowtime.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(0).Value = CType(Nowtime.Value,Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (Nowtime1.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(Nowtime1.Value,Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDataBy(ByVal Nowtime As Global.System.Nullable(Of Date), ByVal Nowtime1 As Global.System.Nullable(Of Date)) As DataSet1.MTCMasterDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            If (Nowtime.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(0).Value = CType(Nowtime.Value,Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (Nowtime1.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(Nowtime1.Value,Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            Dim dataTable As DataSet1.MTCMasterDataTable = New DataSet1.MTCMasterDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByToday(ByVal dataTable As DataSet1.MTCMasterDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(2)
             If (Me.ClearBeforeFill = true) Then
                 dataTable.Clear
             End If
@@ -2957,7 +3008,7 @@ Namespace DataSet1TableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
         Public Overloads Overridable Function GetDataByToday() As DataSet1.MTCMasterDataTable
-            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            Me.Adapter.SelectCommand = Me.CommandCollection(2)
             Dim dataTable As DataSet1.MTCMasterDataTable = New DataSet1.MTCMasterDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
@@ -3515,7 +3566,7 @@ Namespace DataSet1TableAdapters
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        ID, WCID, DESCRIPTION, CELL, PING_IP, AGENT_IP, Available, Jobno, O"& _ 
                 "pno, Running, Estop, [Count], Idle_Time, Run_Time, Control, TYPE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM          "& _ 
-                "  workcenterlist"
+                "  workcenterlist"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
