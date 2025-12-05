@@ -1,6 +1,6 @@
 ﻿Public Class Form2
 
-    Public shifttime As Date = TimeValue(" 5:59 AM")
+    Public shifttime As Date = TimeValue(" 5:00 AM")
     Public shiftstart As New DateTime(Today.Year, Today.Month, Today.Day, shifttime.Hour, shifttime.Minute, shifttime.Second)
     Public showdate As Date = DateValue("1999-01-01")
 
