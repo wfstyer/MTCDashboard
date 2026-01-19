@@ -2910,7 +2910,8 @@ Namespace DataSet1TableAdapters
             Me._commandCollection(1) = New Global.System.Data.Odbc.OdbcCommand()
             Me._commandCollection(1).Connection = Me.Connection
             Me._commandCollection(1).CommandText = "SELECT        ID, WCID, Operator, Jobnum, Opnum, Nowtime, Running, Partcount"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FRO"& _ 
-                "M            MTCMaster"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Nowtime > ?) AND (Nowtime < ?)"
+                "M            MTCMaster"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Nowtime > ?) AND (Nowtime < ?)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY N"& _ 
+                "owtime"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Nowtime", Global.System.Data.Odbc.OdbcType.DateTime, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Nowtime", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Nowtime1", Global.System.Data.Odbc.OdbcType.DateTime, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Nowtime", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -2918,7 +2919,7 @@ Namespace DataSet1TableAdapters
             Me._commandCollection(2).Connection = Me.Connection
             Me._commandCollection(2).CommandText = "SELECT        ID, WCID, Operator, Jobnum, Opnum, Nowtime, Running, Partcount"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FRO"& _ 
                 "M            dbo.MTCMaster"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        CONVERT(DATE, Nowtime) = CONVERT(DATE, "& _ 
-                "SYSDATETIME())"
+                "SYSDATETIME())"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY Nowtime"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
         End Sub
         

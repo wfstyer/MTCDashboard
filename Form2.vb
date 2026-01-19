@@ -171,30 +171,22 @@
             Dim onflag As Boolean                                           ' - machine - running or not (T/F)
             Dim onmem As Boolean                                            ' - last running status
             Dim lastime As Date = shiftstart                                ' - last time memory
-            Dim machineOn As Boolean                                        ' - is the machine available (ON)
+            'Dim machineOn As Boolean                                        ' - is the machine available (ON)
             Dim changetime As Date
             Dim tallytime As TimeSpan
             segmentend(segmentcount) = 0                                    ' - line segment endpoint - starts at zero
             segmentcolor(segmentcount) = 1                                  ' - default line segment color is red
-            Dim colormem As Short                                       ' - set line segment color red
+            Dim colormem As Short                                           ' - set line segment color red
             Dim countstart As Integer = 0
             Dim searchvalue = Trim(chosenmachines(z))                       ' - go thru all displayed machines
             If CurrentDate.Rows(0)(MarkTime) > shiftstart Then              ' - if first record time > shift start 
                 segmentcolor(segmentcount) = 4                              ' - make segment color gray 
-                segmentcount = 2                                            ' - increment line segment count
                 changetime = CurrentDate.Rows(0)(MarkTime)                  ' - timestamp for status change
                 tallytime = changetime - lastime                            ' - calculate time since last status change
                 segmentend(segmentcount) = tallytime.TotalHours * 100       ' - calculate line segment end
                 lastime = changetime                                        ' - set last status change time memory
+                segmentcount = 2                                            ' - increment line segment count
                 countstart = 1
-            End If
-            Dim currentrow As DataRow() = DataSet1.workcenterlist.Select("WCID = '" + searchvalue + "'")
-            If currentrow(0)("Available") = True Then
-                colormem = 2                                                ' - set segment color yellow
-                machineOn = True
-            Else
-                colormem = 1                                                ' - set segment color red
-                machineOn = False
             End If
             For i% = countstart To CurrentDate.Rows.Count - 1
                 If CurrentDate.Rows(i%)(WorkCID) = searchvalue Then
@@ -211,10 +203,10 @@
                             onmem = onflag                                  ' - set last running status
                             If onmem Then                                   ' - if last segment running then new color is yellow - not running, green
                                 segmentcolor(segmentcount) = 2              ' - set segment color yellow
-                                colormem = 3
+                                'colormem = 3
                             Else
                                 segmentcolor(segmentcount) = 3              ' - set segment color green
-                                colormem = 2
+                                'colormem = 2
                             End If
                             tallytime = changetime - lastime                ' - calculate time since last status change
                             segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100    ' - calculate line segment end
@@ -227,9 +219,18 @@
                     End If
                 End If
             Next
-            If Not machineOn Then
+
+            Dim currentrow As DataRow() = DataSet1.workcenterlist.Select("WCID = '" + searchvalue + "'")
+            If currentrow(0)("Available") = True Then
+                If onmem Then
+                    colormem = 3
+                Else
+                    colormem = 2                                                ' - set segment color yellow
+                End If
+            Else
                 colormem = 1                                                ' - set segment color red
             End If
+
             Dim Interval As TimeSpan = Now - shiftstart
             segmentend(segmentcount) = Interval.TotalHours * 100
             segmentcolor(segmentcount) = colormem

@@ -188,21 +188,13 @@
             Try
                 If CurrentDate.Rows(0)(MarkTime) > shiftstart Then              ' - if first record time > shift start 
                     segmentcolor(segmentcount) = 4                              ' - make segment color gray 
-                    segmentcount = 2                                            ' - increment line segment count
                     changetime = CurrentDate.Rows(0)(MarkTime)                  ' - timestamp for status change
                     tallytime = changetime - lastime                            ' - calculate time since last status change
                     segmentend(segmentcount) = tallytime.TotalHours * 100       ' - calculate line segment end
                     lastime = changetime                                        ' - set last status change time memory
+                    segmentcount = 2                                            ' - increment line segment count
                     countstart = 1
-                    colormem = 1
-                End If
-                Dim currentrow As DataRow() = DataSet1.workcenterlist.Select("WCID = '" + searchvalue + "'")
-                If currentrow(0)("Available") = True Then
-                    colormem = 2                                                ' - set segment color yellow
-                    machineOn = True
-                Else
-                    colormem = 1                                                ' - set segment color red
-                    machineOn = False
+                    'colormem = 1
                 End If
                 For i% = countstart To CurrentDate.Rows.Count - 1
                     'colormem = 1

@@ -1,4 +1,6 @@
-﻿Public Class Form1
+﻿'Imports System.Threading.Tasks
+
+Public Class Form1
 
     Public shifttime As Date = TimeValue(" 5:00 AM")
     Public shiftstart As New DateTime(Today.Year, Today.Month, Today.Day, shifttime.Hour, shifttime.Minute, shifttime.Second)
@@ -377,6 +379,14 @@
             intCursor += 1
         Loop
         boxtally = boxcount - 1
+
+        'Do
+        '    Dim dataTask As Task(Of String) = DownloadDataAsync()
+        'Loop
+
+
+
+
         Timer1.Enabled = True
     End Sub
 
@@ -413,6 +423,89 @@
             Button1.BackColor = Color.LightGreen
         End If
     End Sub
+
+    'Async Function DownloadDataAsync() As Task(Of String)
+    '    ' Simulate an asynchronous operation (e.g., a network call)
+    '    'Await Task.Delay(10000)
+    '    Me.WorkcenterlistTableAdapter.Fill(Me.DataSet1.workcenterlist)
+    '    Dim totaltime As Int32
+    '    Dim idletime As Int32
+    '    Dim cycletime As Int32
+    '    totaltime = DateDiff(DateInterval.Second, shiftstart, Now)
+
+    '    For z = 1 To boxtally
+
+    '        Dim searchvalue = chosenmachines(z)
+    '        Dim searchtext = "ID = '" + searchvalue + "'"
+    '        Dim myrow() As DataRow
+    '        myrow = DataSet1.workcenterlist.Select(searchtext)
+    '        idletime = Val(myrow(0)("Idle_Time"))
+    '        cycletime = Val(myrow(0)("Run_Time"))
+    '        Dim machineon As Boolean = myrow(0)("Available")
+    '        Dim machinerunning As Boolean = myrow(0)("Running")
+    '        If machinerunning Then
+    '            ' running
+    '            infobox1(z).BackColor = Color.White
+    '            infobox2(z).BackColor = Color.White
+    '            infobox3(z).BackColor = Color.LimeGreen
+    '        Else
+    '            If machineon Then
+    '                ' idle
+    '                infobox1(z).BackColor = Color.White
+    '                infobox2(z).BackColor = Color.Yellow
+    '                infobox3(z).BackColor = Color.White
+    '            Else
+    '                ' off
+    '                infobox1(z).BackColor = Color.Red
+    '                infobox2(z).BackColor = Color.White
+    '                infobox3(z).BackColor = Color.White
+    '            End If
+    '        End If
+
+    '        Dim offtime As Integer
+
+    '        If idletime + cycletime > totaltime Then
+    '            idletime = totaltime - cycletime
+    '        End If
+
+    '        offtime = totaltime - idletime - cycletime
+
+    '        grnAngle(z) = 360 * (cycletime / totaltime)
+    '        yelAngle(z) = 360 * (idletime / totaltime)
+    '        redAngle(z) = 360 - grnAngle(z) - yelAngle(z)
+
+    '        Dim iminutestoseconds As Int32 = idletime
+    '        Dim ihms = TimeSpan.FromSeconds(iminutestoseconds)
+    '        Dim ihr = Format(ihms.Hours, "#0")
+    '        Dim imin = Format(ihms.Minutes, "00")
+    '        Dim isec = Format(ihms.Seconds, "00")
+
+    '        Dim cminutestoseconds As Int32 = cycletime
+    '        Dim chms = TimeSpan.FromSeconds(cminutestoseconds)
+    '        Dim chr = Format(chms.Hours, "#0")
+    '        Dim cmin = Format(chms.Minutes, "00")
+    '        Dim csec = Format(chms.Seconds, "00")
+
+    '        Dim ominutestoseconds As Int32 = offtime
+    '        Dim ohms = TimeSpan.FromSeconds(ominutestoseconds)
+    '        Dim ohr = Format(ohms.Hours, "#0")
+    '        Dim omin = Format(ohms.Minutes, "00")
+    '        Dim osec = Format(ohms.Seconds, "00")
+
+    '        infobox1(z).Text = ohr + ":" + omin + ":" + osec
+    '        infobox2(z).Text = ihr + ":" + imin + ":" + isec
+    '        infobox3(z).Text = chr + ":" + cmin + ":" + csec
+    '        infobox4(z).Text = myrow(0)("Jobno")
+    '        infobox5(z).Text = myrow(0)("Opno")
+    '        infobox6(z).Text = myrow(0)("Count")
+
+    '        machinebox(z).Refresh()
+    '    Next
+    '    'Await Task.Delay(10000)
+
+    '    Return (0)
+    'End Function
+
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Me.WorkcenterlistTableAdapter.Fill(Me.DataSet1.workcenterlist)
