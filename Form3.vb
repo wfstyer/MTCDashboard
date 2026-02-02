@@ -194,10 +194,8 @@
                     lastime = changetime                                        ' - set last status change time memory
                     segmentcount = 2                                            ' - increment line segment count
                     countstart = 1
-                    'colormem = 1
                 End If
                 For i% = countstart To CurrentDate.Rows.Count - 1
-                    'colormem = 1
                     If CurrentDate.Rows(i%)(WorkCID) = searchvalue Then
                         If CurrentDate.Rows(i%)(StatusChange) Then              ' - read running or not
                             onflag = True                                       ' - set flag running

@@ -177,7 +177,7 @@
             segmentend(segmentcount) = 0                                    ' - line segment endpoint - starts at zero
             segmentcolor(segmentcount) = 1                                  ' - default line segment color is red
             Dim colormem As Short = 1                                       ' - set line segment color red
-            Dim countstart As Integer = 1
+            Dim countstart As Integer = 0
             Dim searchvalue = Trim(chosenmachines(z))                       ' - go thru all displayed machines
             Try
                 If CurrentDate.Rows(0)(MarkTime) > shiftstart Then              ' - if first record time > shift start 
@@ -187,68 +187,104 @@
                     segmentend(segmentcount) = tallytime.TotalHours * 100       ' - calculate line segment end
                     lastime = changetime                                        ' - set last status change time memory
                     segmentcount = 2
+                    countstart = 1
                 End If
                 For i% = countstart To CurrentDate.Rows.Count - 1
                     If CurrentDate.Rows(i%)(WorkCID) = searchvalue Then
-                        changetime = CurrentDate.Rows(i%)(MarkTime)             ' - timestamp for status change
+                        machineOn = True
                         If CurrentDate.Rows(i%)(StatusChange) Then              ' - read running or not
                             onflag = True                                       ' - set flag running
+                            segmentcolor(segmentcount) = 3                      ' - set segment color green
+                            colormem = 3
                         Else
                             onflag = False                                      ' - set flag not running
+                            segmentcolor(segmentcount) = 2                      ' - set segment color yellow
+                            colormem = 2
                         End If
-
-                        If Not machineOn Then
-                            onmem = onflag
-                            If onflag Then                                   ' - if last segment running then new color is yellow - not running, green
-                                segmentcolor(segmentcount) = 2              ' - set segment color yellow
-                                colormem = 2
-                            Else
-                                segmentcolor(segmentcount) = 3              ' - set segment color green
-                                colormem = 3
-                            End If
-                            If changetime > shiftstart Then
-                                segmentcolor(segmentcount) = 1
-                                colormem = 1
-                                lastime = shiftstart
-                            Else
-                                lastime = shiftstart
-                            End If
-                            machineOn = True
-                            tallytime = changetime - lastime
-                            segmentcount += 1
-                            segmentend(segmentcount) = tallytime.TotalHours * 100
+                        changetime = CurrentDate.Rows(i%)(MarkTime)             ' - timestamp for status change
+                        If changetime < shiftstart Then                         ' - if timestamp before shiftstart - ignore it
+                            ' nothing
                         Else
-                            If changetime < shiftstart Then                         ' - if timestamp before shiftstart - ignore it
-                                onmem = onflag
-                                If onflag Then                                   ' - if last segment running then new color is yellow - not running, green
-                                    segmentcolor(segmentcount) = 3              ' - set segment color green
+                            If onflag Xor onmem Then                            ' - if running status changed then
+                                onmem = onflag                                  ' - set last running status
+                                If onmem Then                                   ' - if last segment running then new color is yellow - not running, green
+                                    segmentcolor(segmentcount) = 2              ' - set segment color yellow
                                     colormem = 3
                                 Else
-                                    segmentcolor(segmentcount) = 2              ' - set segment color yellow
+                                    segmentcolor(segmentcount) = 3              ' - set segment color green
                                     colormem = 2
                                 End If
-                                lastime = shiftstart
+                                tallytime = changetime - lastime                ' - calculate time since last status change
+                                segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100    ' - calculate line segment end
+                                lastime = changetime                            ' - set last status change time memory
+                                segmentcount += 1                               ' - increment line segment count
                             Else
-                                If onflag Xor onmem Then                            ' - if running status changed then
-                                    onmem = onflag                                  ' - set last running status
-                                    If onflag Then                                   ' - if last segment running then new color is yellow - not running, green
-                                        segmentcolor(segmentcount) = 2              ' - set segment color yellow
-                                        colormem = 3
-                                    Else
-                                        segmentcolor(segmentcount) = 3              ' - set segment color green
-                                        colormem = 2
-                                    End If
-                                    tallytime = changetime - lastime                ' - calculate time since last status change
-                                    segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100    ' - calculate line segment end
-                                    lastime = changetime                            ' - set last status change time memory
-                                    segmentcount += 1                               ' - increment line segment count
-                                Else
-                                    ' nothing
-                                End If
+                                ' nothing
                             End If
                         End If
                     End If
                 Next
+                'For i% = countstart To CurrentDate.Rows.Count - 1
+                '    If CurrentDate.Rows(i%)(WorkCID) = searchvalue Then
+                '        changetime = CurrentDate.Rows(i%)(MarkTime)             ' - timestamp for status change
+                '        If CurrentDate.Rows(i%)(StatusChange) Then              ' - read running or not
+                '            onflag = True                                       ' - set flag running
+                '        Else
+                '            onflag = False                                      ' - set flag not running
+                '        End If
+
+                '        If Not machineOn Then
+                '            onmem = onflag
+                '            If onflag Then                                   ' - if last segment running then new color is yellow - not running, green
+                '                segmentcolor(segmentcount) = 2              ' - set segment color yellow
+                '                colormem = 2
+                '            Else
+                '                segmentcolor(segmentcount) = 3              ' - set segment color green
+                '                colormem = 3
+                '            End If
+                '            If changetime > shiftstart Then
+                '                segmentcolor(segmentcount) = 1
+                '                colormem = 1
+                '                lastime = shiftstart
+                '            Else
+                '                lastime = shiftstart
+                '            End If
+                '            machineOn = True
+                '            tallytime = changetime - lastime
+                '            segmentcount += 1
+                '            segmentend(segmentcount) = tallytime.TotalHours * 100
+                '        Else
+                '            If changetime < shiftstart Then                         ' - if timestamp before shiftstart - ignore it
+                '                onmem = onflag
+                '                If onflag Then                                   ' - if last segment running then new color is yellow - not running, green
+                '                    segmentcolor(segmentcount) = 3              ' - set segment color green
+                '                    colormem = 3
+                '                Else
+                '                    segmentcolor(segmentcount) = 2              ' - set segment color yellow
+                '                    colormem = 2
+                '                End If
+                '                lastime = shiftstart
+                '            Else
+                '                If onflag Xor onmem Then                            ' - if running status changed then
+                '                    onmem = onflag                                  ' - set last running status
+                '                    If onflag Then                                   ' - if last segment running then new color is yellow - not running, green
+                '                        segmentcolor(segmentcount) = 2              ' - set segment color yellow
+                '                        colormem = 3
+                '                    Else
+                '                        segmentcolor(segmentcount) = 3              ' - set segment color green
+                '                        colormem = 2
+                '                    End If
+                '                    tallytime = changetime - lastime                ' - calculate time since last status change
+                '                    segmentend(segmentcount) = segmentend(segmentcount - 1) + tallytime.TotalHours * 100    ' - calculate line segment end
+                '                    lastime = changetime                            ' - set last status change time memory
+                '                    segmentcount += 1                               ' - increment line segment count
+                '                Else
+                '                    ' nothing
+                '                End If
+                '            End If
+                '        End If
+                '    End If
+                'Next
             Catch
             End Try
             If Not machineOn Then
